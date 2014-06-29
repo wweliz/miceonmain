@@ -24,6 +24,7 @@
 	<body>
 		<div class="main-container">
 			<p>Fake text</p>
+			<div class="splash-view"></div>
 			<div class="signup-view"></div>
 			<div class="login-view"></div>
 			<div class="settings-view"></div>
@@ -34,6 +35,13 @@
 		</div><!-- closes main container div -->
 
 		<!-- Scripts -->
+		<script type="text/template" class="splash-template">
+			<h3>Ready to get started?</h3>
+			<span class="show-signup-btn button">Create an account.</span>
+			<h3>Already have and account?</h3>
+			<span class="show-login-btn button">Log In.</span>
+		</script>
+
 		<script type="text/template" class="signup-template">
 			<input class="username-input" type="text" placeholder="Username">
 			<input class="email-input" type="text" placeholder="Email">
@@ -102,6 +110,7 @@
 		</script>
 
 		<!-- build:js scripts/main.js -->
+		<script src="scripts/splashpage.js"></script>
 		<script src="scripts/models-and-collections.js"></script>
 		<script src="scripts/sign-up-view.js"></script>
 		<script src="scripts/log-in-view.js"></script>

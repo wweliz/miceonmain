@@ -11,7 +11,7 @@ var SignUpView = Parse.View.extend({
 	},
 
 	initialize: function(){
-		//appends signup-view div with contents of the signup-template script
+		//appends signup-view div with contents of the signup-template
 		$('.signup-view').append(this.el);
 
 		//calls the render function
@@ -67,4 +67,5 @@ var SignUpView = Parse.View.extend({
 			}
 		});
 	}
+	
 });

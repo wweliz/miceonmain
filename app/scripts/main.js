@@ -1,7 +1,8 @@
 /* global Parse, _ */
 'use strict';
 
-new SignUpView();
+new SplashView();
+//new SignUpView();
 //new LogInView();
 
 // SETTING THE CURRENT USER //////////////////////////////////////////////
