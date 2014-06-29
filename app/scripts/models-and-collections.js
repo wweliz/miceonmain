@@ -1,3 +1,5 @@
+/* global Parse, _ */
+
 'use strict';
 
 //initializing Parse
@@ -44,6 +46,3 @@ var UserCollection = Parse.Collection.extend({
 });
 
 var users = new UserCollection;
-
-//////////////////////////////////////////////////////////////////////////
-console.log('models-and-collections.js file loaded');

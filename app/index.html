@@ -23,19 +23,73 @@
 
 	<body>
 		<div class="main-container">
-			HTML placement text
-		</div>
+			<p>Fake text</p>
+			<div class="signup-view"></div>
+			<div class="login-view"></div>
+			<div class="settings-view"></div>
+			<div class="home-view"></div>
+			<div class="mouse-view"></div>
+			<div class="single-photo-view"></div>
+			<div class="photo-gallery-view"></div>
+		</div><!-- closes main container div -->
 
 		<!-- Scripts -->
-		<!-- insert template scripts here -->
+		<script type="text/template" class="signup-template">
+			<input class="username-input" type="text" placeholder="Username">
+			<input class="email-input" type="text" placeholder="Email">
+			<input class="password-input" type="text" placeholder="Password">
+			<input class="hometown-input" type="text" placeholder="Where are you from?">
+			<span class="signup-btn button">Sign Up</span>
+		</script>
+
+		<script type="text/template" class="login-template">
+			<input class="username-input" type="text" placeholder="Username" value="<%= username %>">
+			<input class="password-input" type="text" placeholder="Password" value="<%= password %>">
+			<span class="login-btn button">Log In</span>
+		</script>
+
+		<script type="text/template" class="user-settings-template">
+			<input class="email-input" type="text" placeholder="Email" value="<%= email %>">
+			<input class="password-input" type="text" placeholder="Password" value="<%= password %>">
+			<span class="save-settings-btn button">Save</span>
+		</script>
+
+		<script type="text/template" class="user-home-template">
+			<h1> <%= username %> </h1>
+				<h3> <%= userGeo %> </h3>
+			<h2>Closest Mouse</h2>
+				<h3> <%= mouseName %> </h3>
+				<h4> <%= mouseGeopoint %> </h4>
+			<h2>Mice Found</h2>
+			<h2>Mice Remaining</h2>
+			<h2> <%= time %> </h2>
+		</script>
+
+		<script type="text/template" class="mouse-view-template">
+			<h1> <%= mouseName %> </h1>
+			<h3> <%= mouseGeopoint %> </h3>
+			<p> <%= mouseHint %> </p>
+		</script>
+
+		<script type="text/template" class="photo-template">
+			<h1> <%= mouseName %> </h1>
+			<img src="<%= imgURL %>"/>
+			<h4> <%= imgCaption %> </h4>
+		</script>
+
+		<script type="text/template" class="gallery-template">
+			<img src="<%= imgURL %>"/>
+		</script>
+
 
 		<!-- build:js scripts/vendor.js -->
 		<!-- bower:js -->
 		<script src="bower_components/jquery/dist/jquery.js"></script>
+		<script src="bower_components/underscore/underscore.js"></script>
 		<!-- endbower -->
 		<!-- endbuild -->
 
-		 <script src="//www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+		<script src="//www.parsecdn.com/js/parse-1.2.18.min.js"></script>
 
 		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 		<script>
@@ -49,7 +103,8 @@
 
 		<!-- build:js scripts/main.js -->
 		<script src="scripts/models-and-collections.js"></script>
-		<script src="scripts/users.js"></script>
+		<script src="scripts/sign-up-view.js"></script>
+		<script src="scripts/log-in-view.js"></script>
 		<script src="scripts/main.js"></script>
 		<!-- endbuild -->
 	</body>
