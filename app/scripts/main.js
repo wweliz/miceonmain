@@ -1,8 +1,10 @@
 /* global Parse, _ */
 'use strict';
 
-new SplashView();
-//new UserHomeView();
+//instantiates the initial SplashView
+//new SplashView();
+
+new UserSettingsView({model: User});
 
 // SETTING THE CURRENT USER //////////////////////////////////////////////
 // var currentUser = Parse.User.current();
