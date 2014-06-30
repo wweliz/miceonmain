@@ -2,8 +2,7 @@
 'use strict';
 
 new SplashView();
-//new SignUpView();
-//new LogInView();
+//new UserHomeView();
 
 // SETTING THE CURRENT USER //////////////////////////////////////////////
 // var currentUser = Parse.User.current();

@@ -14,7 +14,6 @@ var SplashView = Parse.View.extend({
 	initialize: function(){
 		//appends splash-view div with contents of the splash-template
 		$('.splash-view').append(this.el);
-
 		//calls the render function
 		this.render();
 	},
@@ -24,14 +23,21 @@ var SplashView = Parse.View.extend({
 		return this;
 	},
 
+	//SplashView has no models or collections and doesn't have a "listen",
+	//so you can remove the view rather than destroying it 
+
 	showSignUpView: function(){
-		console.log('show-signup-btn clicked');
-		//new SignUpView();
+		//removes the SplashView from the DOM
+		this.remove();
+		//creates a new SignUpView
+		new SignUpView();
 	},
 
 	showLogInView: function(){
-		console.log('show-login-btn clicked');
-		//new LogInView();
+		//removes the SplashView from the DOM
+		this.remove();
+		//creates a new LogInView
+		new LogInView();
 	}
 
 });

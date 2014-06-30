@@ -3,7 +3,6 @@
 
 // LOG IN VIEW ///////////////////////////////////////////////////////////
 var LogInView = Parse.View.extend({
-	className : 'login',
 
 	loginTemplate: _.template($('.login-template').text()),
 
@@ -16,12 +15,11 @@ var LogInView = Parse.View.extend({
 		$('.login-view').append(this.el);
 
 		//calls the render function
-		//this.render();
+		this.render();
 	},
 
 	render: function(){
-		var renderedTemplate = this.loginTemplate(this.model.attributes);
-		this.$el.html(renderedTemplate);
+		this.$el.html(this.loginTemplate);
 		return this;
 	},
 
@@ -32,12 +30,14 @@ var LogInView = Parse.View.extend({
 
 		Parse.User.logIn(usernameVal, passwordVal, {
 		  success: function(user) {
+		  	console.log('User logged in.');
 		    // Do stuff after successful login.
 		  },
 		  error: function(user, error) {
+		  	console.log('User not logged in.');
 		    // The login failed. Check error to see why.
 		  }
 		});
 	}
-	
+
 });
