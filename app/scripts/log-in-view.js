@@ -28,16 +28,23 @@ var LogInView = Parse.View.extend({
 		var usernameVal = $('.username-input').val();
 		var passwordVal = $('.password-input').val();
 
+		//calls Parse's login function
 		Parse.User.logIn(usernameVal, passwordVal, {
 		  success: function(user) {
-		  	console.log('User logged in.');
-		    // Do stuff after successful login.
-		  },
+		  	var userSessionToken = Parse.User.current()._sessionToken;
+				console.log('Username', user.get('username'), 'is logged in with session token', userSessionToken);
+		    
+		    ////need to remove the LogInView from the DOM
+				
+				//creates a new UserHomeView
+				//new UserHomeView();
+			},
+
 		  error: function(user, error) {
+		  	alert('Error: Sign up failed.');
 		  	console.log('User not logged in.');
-		    // The login failed. Check error to see why.
+				//user stays on the login page
 		  }
 		});
 	}
-
 });

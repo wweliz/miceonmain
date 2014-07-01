@@ -30,7 +30,7 @@ var SignUpView = Parse.View.extend({
 		var hometownVal = $('.hometown-input').val();
 
 		//creates a user instance; adds that instance to the users collection
-		//sets the properties of the user to the value of the input fields 
+		//sets the properties of that user to be the value of the input fields
 		var user = users.add({
 				username:		usernameVal,
 				email:			emailVal,
@@ -43,20 +43,21 @@ var SignUpView = Parse.View.extend({
 			//calls Parse's login function
 			Parse.User.logIn(usernameVal, passwordVal, {
 			  success: function(user) {
-			    console.log('User logged in.');
-			    //removes the SignUpView from the DOM
-					/////////////////////////////////////this.remove( bind(this) );
-					//creates a new SignUpView
+			  	var userSessionToken = Parse.User.current()._sessionToken;
+					console.log('Username', user.get('username'), 'is logged in with session token', userSessionToken);
+			    
+			    ////need to remove the SignUpView from the DOM
+					
+					//creates a new UserHomeView
 					//new UserHomeView();
 				},
+
 			  error: function(user, error) {
+			  	alert('Error: Sign up failed.');
 			  	console.log('User not logged in.');
-			    //show error message and let the user try again
-					//alert('Error: Sign up failed.' + error.code + ' ' + error.message);
 					//user stays on the signup page
 			  }
 			});
 		});
 	}
-
 });
