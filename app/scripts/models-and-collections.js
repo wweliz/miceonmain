@@ -38,12 +38,6 @@ var photos = new PhotoCollection;
 // USER MODEL ////////////////////////////////////////////////////
 var User = Parse.Object.extend({
 	className: 'User',
-
-	defaults: {
-	  username	: 'fakeuser',
-		email	: 'abc@abc.com',
-		password : 'fakepass'
-  }
 });
 
 // USER COLLECTION ////////////////////////////////////////////////
