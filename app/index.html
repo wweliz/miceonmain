@@ -46,7 +46,7 @@
 			<input class="email-input" type="text" placeholder="Email">
 			<input class="password-input" type="text" placeholder="Password">
 			<input class="hometown-input" type="text" placeholder="Where are you from?">
-			<span class="signup-btn button"> <a href="#userview">Sign Up</a> </span>
+			<span class="signup-btn button"> Sign Up</span>
 		</script>
 
 		<script type="text/template" class="login-template">
@@ -65,8 +65,8 @@
 			<h1> <%= currentUser.attributes.username %> </h1>
 				<h3> <%= currentUser.attributes.userGeo %> </h3>
 			<h2>Closest Mouse</h2>
-				<h3> <%= this.mouseName %> </h3>
-				<h4> <%= this.mouseGeopoint %> </h4>
+				<h3> Name: <%= this.mouseName %> </h3>
+				<h4> Lat/Lon <%= this.mouseGeopoint %> </h4>
 			<h2>Mice Found</h2>
 			<h2>Mice Remaining</h2>
 			<h2> <%= this.time %> </h2>
@@ -115,6 +115,7 @@
 		<script src="scripts/log-in-view.js"></script>
 		<script src="scripts/user-home-view.js"></script>
 		<script src="scripts/user-settings-view.js"></script>
+		<script src="scripts/geo.js"></script>		
 		<script src="scripts/router.js"></script>
 		<!-- endbuild -->
 	</body>

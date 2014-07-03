@@ -40,35 +40,38 @@ var AppRouter = Parse.Router.extend({
   },
 
 	renderUserHome: function(){
-		if (currentUser) {
-				window.location = '/#userview';
-			//redirect to the UserHomeView
-		// if there is NOT a currently logged in user...
+		if (!currentUser){
+			this.redirectToSignup();
 		} else {
-			//redirect to the SplashView
+	  	//instantiate the UserHomeView	
+			new UserHomeView({model: Parse.User.current().attributes});
 		}
-		var currentUser = Parse.User.current();
 
-
-  	//instantiate the UserHomeView	
-		new UserHomeView({model: Parse.User.current().attributes});
   },
 
 	renderUserSettings: function(){
-  	//instantiate the UserSettingsView
-  	// this.loginview.remove();
-		new UserSettingsView();
+		if (!currentUser){
+			this.redirectToSignup();
+		} else {
+	  	//instantiate the UserSettingsView
+	  	// this.loginview.remove();
+			new UserSettingsView();
+		}
   },
 
 	renderLogOut: function(){
   	//instantiate the LogOutView
 		new LogOutView();
+  },
+
+  redirectToSignup: function(){
+  	router.navigate('signup', {trigger: true});
   }
 
 });
 
 //instantiate the router
-new AppRouter;
+var router = new AppRouter;
 Parse.history.start();
 
 
