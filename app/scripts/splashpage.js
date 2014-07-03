@@ -1,4 +1,4 @@
-/* global Parse, _ */
+/* global Parse, _, currentUser */
 'use strict';
 
 // LOG IN VIEW ///////////////////////////////////////////////////////////
@@ -23,21 +23,21 @@ var SplashView = Parse.View.extend({
 		return this;
 	},
 
-	//SplashView has no models or collections and doesn't have a "listen",
-	//so you can remove the view rather than destroying it 
+	//because SplashView has no models or collections, the view can simply
+	//be removed rather than destroyed
+	//removing a view from the DOM calls stopListening, which stops the
+	//view from listening to any bound events
 
 	showSignUpView: function(){
 		//removes the SplashView from the DOM
 		this.remove();
-		//creates a new SignUpView
-		new SignUpView();
+		//router will redirect to the SignUpView
 	},
 
 	showLogInView: function(){
 		//removes the SplashView from the DOM
 		this.remove();
-		//creates a new LogInView
-		new LogInView();
+		//router will redirect to the LogInView
 	}
 
 });

@@ -1,4 +1,4 @@
-/* global Parse, _ */
+/* global Parse, _, currentUser */
 'use strict';
 
 // LOG IN VIEW ///////////////////////////////////////////////////////////
@@ -46,10 +46,9 @@ var SignUpView = Parse.View.extend({
 			  	var userSessionToken = Parse.User.current()._sessionToken;
 					console.log('Username', user.get('username'), 'is logged in with session token', userSessionToken);
 			    
-			    ////need to remove the SignUpView from the DOM
-					
-					//creates a new UserHomeView
-					//new UserHomeView();
+			    //removes the SignUpView from the DOM
+					this.remove();
+					//router will redirect to the UserHomeView
 				},
 
 			  error: function(user, error) {
@@ -60,4 +59,5 @@ var SignUpView = Parse.View.extend({
 			});
 		});
 	}
+
 });

@@ -1,4 +1,4 @@
-/* global Parse, _ */
+/* global Parse, _, currentUser */
 'use strict';
 
 // USER SETTINGS VIEW ///////////////////////////////////////////////////////////
@@ -28,11 +28,10 @@ var UserSettingsView = Parse.View.extend({
 		var emailVal = $('.email-input').val();
 		var passwordVal = $('.password-input').val();
 
-		var currentUser = Parse.User.current();
-			currentUser.set({
-					email:		emailVal,
-					password:	passwordVal
-			});
+		currentUser.set({
+				email:		emailVal,
+				password:	passwordVal
+		});
 
 		currentUser.save();
 	}

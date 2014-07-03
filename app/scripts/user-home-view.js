@@ -1,4 +1,4 @@
-/* global Parse, _ */
+/* global Parse, _, currentUser */
 'use strict';
 
 // USER HOME VIEW ///////////////////////////////////////////////////////////
@@ -21,10 +21,6 @@ var UserHomeView = Parse.View.extend({
 	render: function(){
 		this.$el.html(this.homeTemplate);
 		return this;
-
-		// var renderedTemplate = this.homeTemplate(this.model.attributes);
-		// this.$el.html(renderedTemplate);
-		// return this;
 	}
 
 });

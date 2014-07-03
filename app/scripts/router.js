@@ -1,9 +1,8 @@
-/* global Parse */
+/* global Parse, _, currentUser */
 'use strict';
 
 // THE APP ROUTER ////////////////////////////////////////////////////////
-
-var appRouter = Parse.Router.extend({
+var AppRouter = Parse.Router.extend({
 	routes: {
 		//URL to match		//function called when the hash matches
 		''								: 'renderSplashPage',				//	url/#
@@ -15,18 +14,18 @@ var appRouter = Parse.Router.extend({
 	},
 
 	initialize: function(){
-		var currentUser = Parse.User.current();
-			// if there is a currently logged in user...
-			if (currentUser) {
-				this.renderUserHome();
-			// if there is NOT a currently logged in user...
-			} else {
-			  this.renderSplashPage();
-			}
+		// if there is a currently logged in user...
+		if (currentUser) {
+				window.location = '/#userview';
+			//redirect to the UserHomeView
+		// if there is NOT a currently logged in user...
+		} else {
+			//redirect to the SplashView
+		}
 	},
 
 	renderSplashPage: function(){
-		//instantiate the initial SplashView
+		//instantiate the SplashView
 		new SplashView();
 	},
 
@@ -37,16 +36,27 @@ var appRouter = Parse.Router.extend({
 
 	renderLogIn: function(){
   	//instantiate the LogInView
-		new LogInView();
+		this.loginview = new LogInView();
   },
 
 	renderUserHome: function(){
-  	//instantiate the UserHomeView
-		new UserHomeView({model: currentUser.attributes});
+		if (currentUser) {
+				window.location = '/#userview';
+			//redirect to the UserHomeView
+		// if there is NOT a currently logged in user...
+		} else {
+			//redirect to the SplashView
+		}
+		var currentUser = Parse.User.current();
+
+
+  	//instantiate the UserHomeView	
+		new UserHomeView({model: Parse.User.current().attributes});
   },
 
 	renderUserSettings: function(){
   	//instantiate the UserSettingsView
+  	// this.loginview.remove();
 		new UserSettingsView();
   },
 
@@ -57,5 +67,15 @@ var appRouter = Parse.Router.extend({
 
 });
 
+//instantiate the router
+new AppRouter;
+Parse.history.start();
 
-//Parse.history.start();
+
+
+// CLEARING THE CURRENT USER & LOGGING OUT ///////////////////////////////
+// $('.logout-btn').click(function() {
+// 	//calls the logout function
+// 	Parse.User.logOut();
+// 	//current user is now null
+// });
