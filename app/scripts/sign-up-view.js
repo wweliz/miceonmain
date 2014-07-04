@@ -47,12 +47,13 @@ var SignUpView = Parse.View.extend({
 			Parse.User.logIn(usernameVal, passwordVal, {
 			  success: function(user) {
 			  	window.currentUser = Parse.User.current();
+			  	var userSessionToken = Parse.User.current()._sessionToken;
+					console.log('Username', user.get('username'), 'is logged in with session token ', userSessionToken);
 			    
 					router.navigate('userview', {trigger: true});
 
 			    //removes the SignUpView from the DOM
 					that.remove();
-					//router will redirect to the UserHomeView
 				},
 
 			  error: function(user, error) {

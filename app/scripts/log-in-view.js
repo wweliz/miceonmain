@@ -39,7 +39,6 @@ var LogInView = Parse.View.extend({
 		  	var userSessionToken = Parse.User.current()._sessionToken;
 				console.log('Username', user.get('username'), 'is logged in with session token ', userSessionToken);
 
-				//router redirects to the UserHomeView
 				router.navigate('userview', {trigger: true});
 
 				//removes the LogInView from the DOM
@@ -47,7 +46,7 @@ var LogInView = Parse.View.extend({
 			},
 
 		  error: function(user, error) {
-		  	alert('Error: Sign up failed.');
+		  	alert('Error: Log in failed.');
 		  	console.log('User not logged in.');
 				//user stays on the login page
 		  }
