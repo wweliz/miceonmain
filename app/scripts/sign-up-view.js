@@ -1,8 +1,9 @@
-/* global Parse, _, currentUser */
+/* global Parse, _ */
 'use strict';
 
 // LOG IN VIEW ///////////////////////////////////////////////////////////
 var SignUpView = Parse.View.extend({
+	
 	signupTemplate: _.template($('.signup-template').text()),
 
 	events: {
@@ -47,7 +48,7 @@ var SignUpView = Parse.View.extend({
 			  success: function(user) {
 			  	window.currentUser = Parse.User.current();
 			    
-					router.navigate('userview', {trigger: true})
+					router.navigate('userview', {trigger: true});
 
 			    //removes the SignUpView from the DOM
 					that.remove();

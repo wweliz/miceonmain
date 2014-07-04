@@ -1,4 +1,4 @@
-/* global Parse, _, currentUser */
+/* global Parse, _ */
 'use strict';
 
 // LOG IN VIEW ///////////////////////////////////////////////////////////
@@ -31,13 +31,13 @@ var SplashView = Parse.View.extend({
 	showSignUpView: function(){
 		//removes the SplashView from the DOM
 		this.remove();
-		//router will redirect to the SignUpView
+		//clicking sign up button with anchor tag redirects to the SignUpView
 	},
 
 	showLogInView: function(){
 		//removes the SplashView from the DOM
 		this.remove();
-		//router will redirect to the LogInView
+		//clicking log in button with anchor tag redirects to the LogInView
 	}
 
 });
