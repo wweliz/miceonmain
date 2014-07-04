@@ -63,10 +63,10 @@
 
 		<script type="text/template" class="user-home-template">
 			<h1> <%= currentUser.attributes.username %> </h1>
-				<h3> <%= currentUser.attributes.userGeo %> </h3>
+				<h3> LAT <%= currentUser.attributes.userGeo.latitude %>, LONG <%= currentUser.attributes.userGeo.longitude %> </h3>
 			<h2>Closest Mouse</h2>
-				<h3> Name: <%= this.mouseName %> </h3>
-				<h4> Lat/Lon <%= this.mouseGeopoint %> </h4>
+				<h3> mouseName <%= this.mouseName %> </h3>
+				<h4> LAT , LONG </h4>
 			<h2>Mice Found</h2>
 			<h2>Mice Remaining</h2>
 			<h2> <%= this.time %> </h2>
@@ -111,11 +111,11 @@
 		<!-- build:js scripts/main.js -->
 		<script src="scripts/splashpage.js"></script>
 		<script src="scripts/models-and-collections.js"></script>
+		<script src="scripts/geo.js"></script>
 		<script src="scripts/sign-up-view.js"></script>
 		<script src="scripts/log-in-view.js"></script>
 		<script src="scripts/user-home-view.js"></script>
-		<script src="scripts/user-settings-view.js"></script>
-		<script src="scripts/geo.js"></script>		
+		<script src="scripts/user-settings-view.js"></script>	
 		<script src="scripts/router.js"></script>
 		<!-- endbuild -->
 	</body>
