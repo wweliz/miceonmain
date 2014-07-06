@@ -9,6 +9,7 @@ var AppRouter = Parse.Router.extend({
 		'signup'					: 'renderSignUp',						//	url/#signup
 		'login'						: 'renderLogIn',						//	url/#login
 		'userview'				: 'renderUserHome',					//	url/#userview
+		'mouseview'				: 'renderClosestMouse',			//	url/#mouseview
 		'usersettings'		: 'renderUserSettings',			//	url/#usersettings
 		'logout'					: 'renderLogOut'						//	url/#logout
 	},
@@ -52,6 +53,11 @@ var AppRouter = Parse.Router.extend({
 	  	//instantiate the UserHomeView with the current user as the model
 			new UserHomeView({model: Parse.User.current().attributes});
 		}
+  },
+
+  renderClosestMouse: function(){
+  	//instantiate the MouseView
+		new MouseView();
   },
 
 	renderUserSettings: function(){

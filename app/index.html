@@ -73,9 +73,10 @@
 		</script>
 
 		<script type="text/template" class="mouse-view-template">
-			<h1> <%= mouseName %> </h1>
-			<h3> <%= mouseGeopoint %> </h3>
-			<p> <%= mouseHint %> </p>
+			<span class="upload-mouse-photo-btn button">Upload Mouse Photo</span>
+			<h1> <%= closestMouse.attributes.mouseName %> </h1>
+			<h3> <%= closestMouse.attributes.mouseGeopoint %> </h3>
+			<p> <%= closestMouse.attributes.mouseHint %> </p>
 		</script>
 
 		<script type="text/template" class="photo-template">
@@ -115,7 +116,9 @@
 		<script src="scripts/sign-up-view.js"></script>
 		<script src="scripts/log-in-view.js"></script>
 		<script src="scripts/user-home-view.js"></script>
-		<script src="scripts/user-settings-view.js"></script>	
+		<script src="scripts/mouse-view.js"></script>
+		<script src="scripts/user-settings-view.js"></script>
+		<script src="scripts/closestmouse.js"></script>		
 		<script src="scripts/router.js"></script>
 		<!-- endbuild -->
 	</body>

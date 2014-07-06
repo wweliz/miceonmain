@@ -4,7 +4,7 @@
 //defining currentUser so that it can be used in the user-home-template
 var currentUser = Parse.User.current();
 
-// USER HOME VIEW ///////////////////////////////////////////////////////////
+// USER HOME VIEW ////////////////////////////////////////////////////////
 var UserHomeView = Parse.View.extend({
 	homeTemplate: _.template($('.user-home-template').text()),
 
