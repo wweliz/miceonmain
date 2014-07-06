@@ -57,13 +57,13 @@ function trackUserLocation() {
 	var currentUser = Parse.User.current();
 
 	// if there is a currently logged in user...
-//	if (currentUser) {
+if (currentUser) {
 		//passes the success and failure callbacks through the watchPosition function
 			navigator.geolocation.watchPosition(geoSuccess, geoError, {enableHighAccuracy: true});
 	// if there is NOT a currently logged in user...
-	// } else {
-	// 	console.log('Cannot track user location before log in.')
-	// }
+} else {
+	console.log('Cannot track user location before log in.')
+	}
 }
 
 //calls the trackUserLocation function
