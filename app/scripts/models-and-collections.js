@@ -19,7 +19,7 @@ var MouseCollection = Parse.Collection.extend({
 	model: Mouse
 });
 
-var mice = new MouseCollection;
+var mice = new MouseCollection();
 
 // PHOTO MODEL ///////////////////////////////////////////////////////////
 var Photo = Parse.Object.extend({
@@ -32,7 +32,7 @@ var PhotoCollection = Parse.Collection.extend({
 	model: Photo
 });
 
-var photos = new PhotoCollection;
+var photos = new PhotoCollection();
 
 // USER MODEL ////////////////////////////////////////////////////////////
 var User = Parse.Object.extend({
@@ -44,4 +44,4 @@ var UserCollection = Parse.Collection.extend({
 	model: User
 });
 
-var users = new UserCollection;
+var users = new UserCollection();

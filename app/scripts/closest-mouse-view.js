@@ -1,9 +1,9 @@
 /* global Parse, _ */
 'use strict';
 
-// mice.fetch().done(function(){
-// 	//console.log('closestMouse is', closestMouse);
-// });
+// <h1> <%= closestMouse.attributes.mouseName %> </h1>
+// <h3> <%= closestMouse.attributes.mouseGeopoint %> </h3>
+// <p> <%= closestMouse.attributes.mouseHint %> </p>
 
 // CLOSEST MOUSE VIEW ////////////////////////////////////////////////////
 var ClosestMouseView = Parse.View.extend({
