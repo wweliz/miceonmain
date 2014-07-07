@@ -1,13 +1,9 @@
 /* global Parse, _ */
 //'use strict';
 
-// flat maps are projections; hence, all projections have some distortion
-
-// when using equirectangular approximation, the latitude and longitude of
-// the earth are projected onto a flat map so that the Pythagorean Theorem
-// can be used to find the distance between 2 points
-	//	Pythagorean theorem: a^2 + b^2 = c^2
-	// latitude and longitude values must be in radians
+// mice.fetch().done(function(){
+// 	console.log('closestMouse is', closestMouse);
+// });
 
 // CONVERTING LATITUDE AND LONGITUDE VALUES FROM DEGREES TO RADIANS //////
 function degreesToRadians( deg ) {
@@ -69,3 +65,31 @@ function closestPoint(userLat, userLong){
 
 var closestMouse = closestPoint(userLat, userLong);
 console.log('closestMouse is:', closestMouse);
+
+
+// CLOSEST MOUSE VIEW ////////////////////////////////////////////////////
+var ClosestMouseView = Parse.View.extend({
+	mouseTemplate: _.template($('.mouse-view-template').text()),
+
+	events: {
+		//'click .upload-mouse-photo-btn'	: 'uploadMousePhoto',
+	},
+
+	initialize: function(){
+		//appends mouse-view div with contents of the user-home-template
+		$('.closest-mouse-view').append(this.el);
+
+		//calls the render function
+		this.render();
+	},
+
+	render: function(){
+		this.$el.html(this.mouseTemplate());
+		return this;
+	},
+
+	uploadMousePhoto: function(){
+		//do things
+	}
+
+});

@@ -41,7 +41,7 @@ function geoSuccess(position) {
 
 	currentUser.add({
 		userGeo: point
-	})
+	});
 
 	currentUser.save();
 
@@ -62,7 +62,7 @@ if (currentUser) {
 			navigator.geolocation.watchPosition(geoSuccess, geoError, {enableHighAccuracy: true});
 	// if there is NOT a currently logged in user...
 } else {
-	console.log('Cannot track user location before log in.')
+	console.log('Cannot track user location before log in.');
 	}
 }
 

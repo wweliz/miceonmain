@@ -28,7 +28,7 @@
 			<div class="login-view"></div>
 			<div class="settings-view"></div>
 			<div class="home-view"></div>
-			<div class="mouse-view"></div>
+			<div class="closest-mouse-view"></div>
 			<div class="single-photo-view"></div>
 			<div class="photo-gallery-view"></div>
 		</div><!-- closes main container div -->
@@ -80,6 +80,7 @@
 		</script>
 
 		<script type="text/template" class="photo-template">
+			<span class="mouse-photo-gallery-btn button"> <a href="#mousegallery">View Photo Gallery</a> </span>
 			<h1> <%= mouseName %> </h1>
 			<img src="<%= imgURL %>"/>
 			<h4> <%= imgCaption %> </h4>
@@ -112,12 +113,13 @@
 		<!-- build:js scripts/main.js -->
 		<script src="scripts/splashpage.js"></script>
 		<script src="scripts/models-and-collections.js"></script>
-		<script src="scripts/geo.js"></script>
 		<script src="scripts/sign-up-view.js"></script>
 		<script src="scripts/log-in-view.js"></script>
 		<script src="scripts/user-home-view.js"></script>
-		<script src="scripts/mouse-view.js"></script>
+		<script src="scripts/closest-mouse-view.js"></script>
+		<script src="scripts/single-mouse-photo-view.js"></script>
 		<script src="scripts/user-settings-view.js"></script>
+		<script src="scripts/geo.js"></script>		
 		<script src="scripts/closestmouse.js"></script>		
 		<script src="scripts/router.js"></script>
 		<!-- endbuild -->

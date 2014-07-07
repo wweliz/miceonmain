@@ -10,6 +10,8 @@ var AppRouter = Parse.Router.extend({
 		'login'						: 'renderLogIn',						//	url/#login
 		'userview'				: 'renderUserHome',					//	url/#userview
 		'mouseview'				: 'renderClosestMouse',			//	url/#mouseview
+		'mousephoto'			: 'renderSingleMouse',			//	url/#mousephoto
+		'mousegallery'		: 'renderMouseGallery',			//	url/#mousegallery
 		'usersettings'		: 'renderUserSettings',			//	url/#usersettings
 		'logout'					: 'renderLogOut'						//	url/#logout
 	},
@@ -56,8 +58,18 @@ var AppRouter = Parse.Router.extend({
   },
 
   renderClosestMouse: function(){
-  	//instantiate the MouseView
-		new MouseView();
+  	//instantiate the ClosestMouseView
+		new ClosestMouseView();
+  },
+
+  renderSingleMouse: function(){
+  	//instantiate the MousePhotoView
+		new MousePhotoView();
+  },
+
+  renderMouseGallery: function(){
+  	//instantiate the MouseGalleryView
+		new MouseGalleryView();
   },
 
 	renderUserSettings: function(){
