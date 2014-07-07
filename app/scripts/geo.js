@@ -45,7 +45,7 @@ function geoSuccess(position) {
 
 	currentUser.save();
 
-	console.log('Current user location is latitude ' + currentUser.attributes.userGeo.latitude + ' longitude '+ currentUser.attributes.userGeo.longitude + '.');
+	console.log('Current user location saved. Latitude: ' + currentUser.attributes.userGeo.latitude + '. Longitude: '+ currentUser.attributes.userGeo.longitude + '.');
 }
 
 //defines the failure callback
@@ -69,8 +69,32 @@ if (currentUser) {
 //calls the trackUserLocation function
 trackUserLocation();
 
-//need todefine closestMouse
-//<h4> LAT <%= closestMouse.attributes.mouseGeopoint.latitude %>, LONG <%= closestMouse.attributes.mouseGeopoint.longitude %> </h4>
+// FINDING THE CLOSEST POINT /////////////////////////////////////////////
 
-// var img = new Image();
-//     img.src = "http://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+	//names the user's geolocation so that it can be passed through a query
+var userGeoPoint = currentUser.attributes.userGeo;
+
+var placeObject = new Parse.Object();
+	//placeObject.set('location', userGeoPoint);
+
+	//defines a query that is used to fetch PlaceObjects
+var query = new Parse.Query(PlaceObject);
+	//tells the query to look for locations near the user
+query.near('location', userGeoPoint);
+	//limits the length of the returned array to 9
+query.limit(9);
+	//finds all objects that match the restraints of the query
+query.find({
+  success: function(placesObjects){
+  	console.log('placesObjects:', placesObjects);
+  },
+  error: function(error){
+    console.log('There was an error calling the query function.');
+  }
+});
+
+//placesObjects will be an array of objects ordered by distance
+//(nearest to farthest) from the user's location
+
+//the object nearest to the user will be the first object in the array
+var closestMouse = placesObjects.first();
