@@ -30,6 +30,7 @@
 			<div class="home-view"></div>
 			<div class="closest-mouse-view"></div>
 			<div class="single-photo-view"></div>
+			<div class="reward-view"></div>
 			<div class="photo-gallery-view"></div>
 			<div class="history-view"></div>
 			
@@ -89,6 +90,11 @@
 			<h4> <%= imgCaption %> </h4>
 		</script>
 
+		<script type="text/template" class="reward-template">
+			<h2>YOU FOUND</h2>
+			<span class="show-all-rewards-btn button"> <a href="#rewardgallery">See All Rewards</a> </span>
+		</script>		
+
 		<script type="text/template" class="gallery-template">
 			<img src="<%= imgURL %>"/>
 		</script>
@@ -136,6 +142,7 @@
 		<script src="scripts/user-home-view.js"></script>
 		<script src="scripts/closest-mouse-view.js"></script>
 		<script src="scripts/single-mouse-photo-view.js"></script>
+		<script src="scripts/reward-view.js"></script>		
 		<script src="scripts/user-settings-view.js"></script>
 		<script src="scripts/geo.js"></script>
 		<script src="scripts/history-view.js"></script>

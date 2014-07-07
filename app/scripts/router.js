@@ -11,7 +11,9 @@ var AppRouter = Parse.Router.extend({
 		'userview'				: 'renderUserHome',					//	url/#userview
 		'mouseview'				: 'renderClosestMouse',			//	url/#mouseview
 		'mousephoto'			: 'renderSingleMouse',			//	url/#mousephoto
+		'mousereward'			: 'renderMouseReward',			//	url/#mousereward
 		'mousegallery'		: 'renderMouseGallery',			//	url/#mousegallery
+		'rewardgallery'		: 'renderAllRewards',				//	url/#rewardgallery
 		'micehistory'			: 'renderMiceHistory',			//	url/#micehistory
 		'usersettings'		: 'renderUserSettings',			//	url/#usersettings
 		'logout'					: 'renderLogOut'						//	url/#logout
@@ -68,9 +70,19 @@ var AppRouter = Parse.Router.extend({
 		new MousePhotoView();
   },
 
+  renderMouseReward: function(){
+  	//instantiate the MouseRewardView
+		new MouseRewardView();
+  },
+
   renderMouseGallery: function(){
   	//instantiate the MouseGalleryView
 		new MouseGalleryView();
+  },
+
+  renderAllRewards: function(){
+  	//instantiate the AllRewardsView
+		new AllRewardsView();
   },
 
 	renderUserSettings: function(){
