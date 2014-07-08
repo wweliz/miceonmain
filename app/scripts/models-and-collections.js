@@ -21,6 +21,17 @@ var MouseCollection = Parse.Collection.extend({
 
 var mice = new MouseCollection();
 
+// FETCHING THE MICE COLLECTION //////////////////////////////////////////
+//fetches the mice collection
+// mice.fetch({
+// 	success: function(collection){
+// 		console.log('The mice collection was successfully fetched.');
+// 	},
+// 	error: function(collection, error){
+// 		console.log('The mice collection could not be retrieved.');
+// 	}
+// });
+
 // PHOTO MODEL ///////////////////////////////////////////////////////////
 var Photo = Parse.Object.extend({
 	className: 'Photo',

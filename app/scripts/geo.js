@@ -16,7 +16,7 @@ function checkGeoSuport() {
 
 checkGeoSuport();
 
-// SAVING USER LOCATION TO PARSE /////////////////////////////////////////
+// TRACKING THE CURRENT USER'S LOCATION //////////////////////////////////
 
 //there are two methods to get the current position of the device:
 	//navigator.geolocation.getCurrentPosition()
@@ -32,8 +32,6 @@ checkGeoSuport();
 													// type: Boolean
 													// default: false
 
-
-
 // //defines the success callback
 function geoSuccess(position) {
 	var currentUser = Parse.User.current();
@@ -46,7 +44,6 @@ function geoSuccess(position) {
 	// });
 
 	// currentUser.save();
-
 	// console.log('Current user location saved. Latitude: ' + currentUser.attributes.userGeo.latitude + '. Longitude: '+ currentUser.attributes.userGeo.longitude + '.');
 }
 
@@ -71,43 +68,31 @@ if (currentUser) {
 //calls the trackUserLocation function
 trackUserLocation();
 
-// FINDING THE CLOSEST POINT /////////////////////////////////////////////
+// QUERYING FOR THE NEAREST POINT ////////////////////////////////////////
 
-//names the user's geolocation so that it can be passed through a query
-var userGeoPoint = currentUser.attributes.userGeo;
-console.log('userGeoPoint is', userGeoPoint);
+// //names the user's geolocation so that it can be passed through a query
+// var userGeoPoint = currentUser.attributes.userGeo;
+// console.log('userGeoPoint is', userGeoPoint);
 
-//fetches the mice collection
-mice.fetch({
-	success: function(collection){
-		console.log('The mice collection was successfully fetched.');
-	},
-	error: function(collection, error){
-		console.log('The mice collection could not be retrieved.');
-	}
-});
+// //defines a query that is used to fetch PlaceObjects
+// var query = new Parse.Query(Mouse);
+// //tells the query to look for locations near the user
+// query.near('mouseGeopoint', userGeoPoint);
+// //limits the length of the returned array to 9
+// query.limit(9);
+// //finds all objects that match the restraints of the query
+// query.find({
+// 	success: function(queryresults){
+// 		console.log('Successfully retrieved ' + queryresults.length + ' results.');
+// 		mouseList = new MouseCollection(queryresults);
+// 	},
+// 	error: function(error){
+// 		console.log('There was an error calling the query function.');
+// 	}
+// });
 
+// //queryresults will be an array of objects ordered by distance
+// //(nearest to farthest) from the user's location
 
-
-//defines a query that is used to fetch PlaceObjects
-var query = new Parse.Query(Mouse);
-//tells the query to look for locations near the user
-query.near('mouseGeopoint', userGeoPoint);
-//limits the length of the returned array to 9
-query.limit(9);
-//finds all objects that match the restraints of the query
-query.find({
-	success: function(queryresults){
-		console.log('Successfully retrieved ' + queryresults.length + ' results.');
-		mouseList = new MouseCollection(queryresults);
-	},
-	error: function(error){
-		console.log('There was an error calling the query function.');
-	}
-});
-
-//queryresults will be an array of objects ordered by distance
-//(nearest to farthest) from the user's location
-
-//the object nearest to the user will be the first object in the array
-//var closestMouse = queryresults.first();
+// //the object nearest to the user will be the first object in the array
+// //var closestMouse = queryresults.first();
