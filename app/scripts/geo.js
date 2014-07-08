@@ -1,6 +1,8 @@
 /* global Parse, _ */
 'use strict';
 
+var mouseList;
+
 // DETERMINING DEVICE SUPPORT FOR GEOLOCATION ////////////////////////////
 function checkGeoSuport() {
 	if (Modernizr.geolocation) {
@@ -39,13 +41,13 @@ function geoSuccess(position) {
 	var userLongitude = position.coords.longitude;
 	var point = new Parse.GeoPoint({latitude: userLatitude, longitude: userLongitude});
 
-	currentUser.set({
-		userGeo: point
-	});
+	// currentUser.set({
+	// 	userGeo: point
+	// });
 
-	currentUser.save();
+	// currentUser.save();
 
-	console.log('Current user location saved. Latitude: ' + currentUser.attributes.userGeo.latitude + '. Longitude: '+ currentUser.attributes.userGeo.longitude + '.');
+	// console.log('Current user location saved. Latitude: ' + currentUser.attributes.userGeo.latitude + '. Longitude: '+ currentUser.attributes.userGeo.longitude + '.');
 }
 
 //defines the failure callback
@@ -85,16 +87,19 @@ mice.fetch({
 	}
 });
 
+
+
 //defines a query that is used to fetch PlaceObjects
 var query = new Parse.Query(Mouse);
 //tells the query to look for locations near the user
-query.near('userGeo', userGeoPoint);
+query.near('mouseGeopoint', userGeoPoint);
 //limits the length of the returned array to 9
 query.limit(9);
 //finds all objects that match the restraints of the query
 query.find({
 	success: function(queryresults){
 		console.log('Successfully retrieved ' + queryresults.length + ' results.');
+		mouseList = new MouseCollection(queryresults);
 	},
 	error: function(error){
 		console.log('There was an error calling the query function.');

@@ -32,16 +32,38 @@ var PhotoCollection = Parse.Collection.extend({
 	model: Photo
 });
 
-var photos = new PhotoCollection();
+// var photos = new PhotoCollection();
 
 // USER MODEL ////////////////////////////////////////////////////////////
 var User = Parse.Object.extend({
 	className: 'User',
 });
 
-// USER COLLECTION ////////////////////////////////////////////////
+// USER COLLECTION ///////////////////////////////////////////////////////
 var UserCollection = Parse.Collection.extend({
 	model: User
 });
 
-var users = new UserCollection();
+// var users = new UserCollection();
+
+//////////////////////////////////////////////////////////////////////////
+// RELATIONAL DATA ///////////////////////////////////////////////////////
+
+// USER-TO RELATIONS /////////////////////////////////////////////////////
+var currentUser = Parse.User.current();
+
+var userMouseRelation = currentUser.relation("miceFound");
+userMouseRelation.add(Mouse);
+
+var userPhotoRelation = currentUser.relation("photosUploaded");
+userPhotoRelation.add(Photo);
+
+//currentUser.save();
+
+// MOUSE-TO RELATIONS ////////////////////////////////////////////////////
+var photo = new Photo();
+
+var mousePhotoRelation = photo.relation("photosUploaded");
+mousePhotoRelation.add(Photo);
+
+//photo.save();
