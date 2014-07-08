@@ -28,6 +28,6 @@ var MouseRewardView = Parse.View.extend({
 		//removes the MouseRewardView from the DOM
 		this.remove();
 		//clicking see all rewards button with anchor tag redirects to the AllRewardsView
-	},
+	}
 
 });

@@ -26,6 +26,6 @@ var AllRewardsView = Parse.View.extend({
 		//removes the AllRewardsView from the DOM
 		this.remove();
 		//clicking back to the search button with anchor tag redirects to the UserHomeView
-  },
+  }
 
 });

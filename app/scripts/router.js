@@ -16,6 +16,7 @@ var AppRouter = Parse.Router.extend({
 		'rewardgallery'		: 'renderAllRewards',				//	url/#rewardgallery
 		'micehistory'			: 'renderMiceHistory',			//	url/#micehistory
 		'usersettings'		: 'renderUserSettings',			//	url/#usersettings
+		'congrats'				: 'renderCongrats',					//	url/#congrats		
 		'logout'					: 'renderLogOut'						//	url/#logout
 	},
 
@@ -99,6 +100,11 @@ var AppRouter = Parse.Router.extend({
   renderMiceHistory: function(){
 		//instantiate the MouseHistoryView
 		new MouseHistoryView();
+  },
+
+	renderCongrats: function(){
+		//instantiate the CongratulationsView
+		new CongratulationsView();
   },
 
 	renderLogOut: function(){
