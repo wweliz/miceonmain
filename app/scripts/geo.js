@@ -146,5 +146,5 @@ var getDistance = function(p1, p2) {
 
 //to find the distance between the user and the nearest mouse...
 			//ansynchronus data needs to be ready
-			//run this function when the xx view loads
+			//run this function when the xx view
 //getDistance(Parse.User.current().get('userGeo'), nearestMouse.get('mouseGeopoint')) * 0.000621371;
