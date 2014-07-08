@@ -2,6 +2,7 @@
 'use strict';
 
 var nearbyMice;
+var nearestMouse;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // DETERMINING DEVICE SUPPORT FOR GEOLOCATION ////////////////////////////
@@ -40,6 +41,15 @@ function geoSuccess(position) {
 	var userLatitude = position.coords.latitude;
 	var userLongitude = position.coords.longitude;
 	var point = new Parse.GeoPoint({latitude: userLatitude, longitude: userLongitude});
+
+	//"nearbyMice" is a collection of mice that are within a certain radius
+		//nearbyMice.min is the mouse with the shortest distance to the user
+	nearestMouse = nearbyMice.min(function(mouse){
+	  //passing the user location and the nearbyMice collection through the getDistance function
+	  return getDistance(Parse.User.current().get('userGeo'), mouse.get('mouseGeopoint')) * 0.000621371;
+	})	
+
+	console.log('The nearest mouse is ' + nearestMouse.attributes.mouseName + '.')
 
 	// currentUser.set({
 	// 	userGeo: point
@@ -91,14 +101,14 @@ console.log('userGeoPoint is', userGeoPoint);
 //defines a query that is used to fetch PlaceObjects
 var query = new Parse.Query(Mouse);
 //tells the query to look for locations near the user
-query.near('mouseGeopoint', userGeoPoint);
+query.withinMiles('mouseGeopoint', userGeoPoint, 10);
 //limits the length of the returned array to 9
 query.limit(9);
 //finds all objects that match the restraints of the query
 query.find({
 	success: function(queryresults){
 		console.log('Successfully retrieved ' + queryresults.length + ' results.');
-		return nearbyMice = new MouseCollection(queryresults);
+		nearbyMice = new MouseCollection(queryresults);
 	},
 	error: function(error){
 		console.log('There was an error calling the query function.');
@@ -133,10 +143,8 @@ var getDistance = function(p1, p2) {
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// PASSING THE QUERY RESULTS THROUGH THE HAVERSINE FORMULA ///////////////
 
-//"nearbyMice" is a collection of mice that are within a certain radius
-
-nearbyMice.min(function(mouse){
-  return getDistance(Parse.User.current().get('userGeo'), mouse.get('mouseGeopoint')) * 0.000621371;
-})
+//to find the distance between the user and the nearest mouse...
+			//ansynchronus data needs to be ready
+			//run this function when the xx view loads
+//getDistance(Parse.User.current().get('userGeo'), nearestMouse.get('mouseGeopoint')) * 0.000621371;
