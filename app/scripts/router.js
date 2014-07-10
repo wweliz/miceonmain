@@ -23,6 +23,8 @@ var AppRouter = Parse.Router.extend({
 	initialize: function(){
 		var currentUser = Parse.User.current();
 
+		this.checkGeoSuport();
+
 		// if there is a currently logged in user...
 		if (currentUser) {
 			//router redirects to the UserHomeView
@@ -35,6 +37,26 @@ var AppRouter = Parse.Router.extend({
 		}
 	},
 
+	////////////////////////////////////////////////////////////////////////
+	// REDIRECT TO SIGN UP IF NO CURRENT USER //////////////////////////////
+  redirectToSignup: function(){
+  	router.navigate('signup', {trigger: true});
+  },
+
+	////////////////////////////////////////////////////////////////////////
+	// DETERMINING DEVICE SUPPORT FOR GEOLOCATION //////////////////////////
+	checkGeoSuport: function() {
+		if (Modernizr.geolocation) {
+			console.log('This device supports geolocation.');
+		} else {
+			// no native support; maybe try a fallback?
+			alert('This device does not support geolocation.');
+			console.log('This device does not support geolocation.');
+		}
+	},
+
+	////////////////////////////////////////////////////////////////////////
+	// RENDERING VIEWS /////////////////////////////////////////////////////
 	renderSplashPage: function(){
 		//instantiate the SplashView
 		new SplashView();
@@ -110,10 +132,6 @@ var AppRouter = Parse.Router.extend({
 	renderLogOut: function(){
   	//instantiate the LogOutView
 		new LogOutView();
-  },
-
-  redirectToSignup: function(){
-  	router.navigate('signup', {trigger: true});
   }
 
 });

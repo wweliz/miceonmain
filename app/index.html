@@ -18,6 +18,8 @@
 
 		<!-- build:js scripts/vendor/modernizr.js -->
 		<script src="bower_components/modernizr/modernizr.js"></script>
+		<script type="text/javascript" src="//use.typekit.net/cuo1poj.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 		<!-- endbuild -->
 	</head>
 
@@ -44,13 +46,19 @@
 			<h1>Mice On Main</h1>
 			<h2>THE GAME</h2>
 			<p>Hidden around Greenville are nine little mice.<br>Go on a hunt to find them all!</p>
-			<h3>Ready to get started?</h3>
-			<span class="show-signup-btn button"> <a href="#signup">Create an account.</a> </span>
-			<h3>Already have an account?</h3>
-			<span class="show-login-btn button"> <a href="#login">Log In</a> </span>
+			<div class="get-started">
+				<h3>Ready to get started?</h3>
+				<span class="show-signup-btn button"> <a href="#signup">Create an account.</a> </span>
+			</div>
+			<div class="get-started">
+				<h3>Already have an account?</h3>
+				<span class="show-login-btn button"> <a href="#login">Log In</a> </span>
+			</div>
 		</script>
 
 		<script type="text/template" class="signup-template">
+			<h1>Sign Up</h1>			
+			<img src="../images/mouse.png">
 			<input class="username-input" type="text" placeholder="Username">
 			<input class="email-input" type="text" placeholder="Email">
 			<input class="password-input" type="text" placeholder="Password">
@@ -59,12 +67,15 @@
 		</script>
 
 		<script type="text/template" class="login-template">
+			<h1>Log In</h1>
+			<img src="../images/mouse.png">
 			<input class="username-input" type="text" placeholder="Username">
 			<input class="password-input" type="text" placeholder="Password">
 			<span class="login-btn button">Log In</span>
 		</script>
 
 		<script type="text/template" class="user-settings-template">
+			<h1>Settings</h1>
 			<input class="email-input" type="text" placeholder="Email">
 			<input class="password-input" type="text" placeholder="Password">
 			<span class="save-settings-btn button">Save</span>
@@ -72,12 +83,12 @@
 
 		<script type="text/template" class="user-home-template">
 			<h1> <%= currentUser.attributes.username %> </h1>
-				<h3> LAT <%= currentUser.attributes.userGeo.latitude %>, LONG <%= currentUser.attributes.userGeo.longitude %> </h3>
-			<h2>Closest Mouse</h2>
+				<h4 class="ll"> LAT <%= currentUser.attributes.userGeo.latitude %>, LONG <%= currentUser.attributes.userGeo.longitude %> </h4>
+			<div class="black-bar"><h2>Closest Mouse</h2></div>
 				<h3> mouseName <%= this.mouseName %> </h3>
-				<h4> LAT , LONG </h4>
-			<h2>Mice Found</h2>
-			<h2>Mice Remaining</h2>
+				<h4 class="ll"> LAT , LONG </h4>
+			<div class="black-bar"><h2>Mice Found</h2></div>
+			<div class="black-bar"><h2>Mice Remaining</h2></div>
 			<h2> <%= this.time %> </h2>
 		</script>
 

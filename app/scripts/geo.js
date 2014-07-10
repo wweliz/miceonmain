@@ -5,20 +5,6 @@ var nearbyMice;
 var nearestMouse;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// DETERMINING DEVICE SUPPORT FOR GEOLOCATION ////////////////////////////
-function checkGeoSuport() {
-	if (Modernizr.geolocation) {
-		console.log('This device supports geolocation.');
-	} else {
-		// no native support; maybe try a fallback?
-		alert('This device does not support geolocation.');
-		console.log('This device does not support geolocation.');
-	}
-}
-
-checkGeoSuport();
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 // TRACKING THE CURRENT USER'S LOCATION //////////////////////////////////
 
 //there are two methods to get the current position of the device:

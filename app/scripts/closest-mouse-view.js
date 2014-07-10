@@ -6,6 +6,8 @@
 // <p> <%= closestMouse.attributes.mouseHint %> </p>
 
 // CLOSEST MOUSE VIEW ////////////////////////////////////////////////////
+
+
 var ClosestMouseView = Parse.View.extend({
 	mouseTemplate: _.template($('.mouse-view-template').text()),
 
