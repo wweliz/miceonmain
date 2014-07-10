@@ -10,8 +10,7 @@ Parse.initialize('VAcV8xNG0NX9Px18WaMwBdxsGyH7CaCk6990BJPn', '2r1eNgxSHNsw77uJdM
 
 // MOUSE MODEL ///////////////////////////////////////////////////////////
 var Mouse = Parse.Object.extend({
-	className: 'Mouse',
-	defaults: { found	: false }
+	className: 'Mouse'
 });
 
 // MOUSE COLLECTION //////////////////////////////////////////////////////
@@ -34,8 +33,7 @@ var mice = new MouseCollection();
 
 // PHOTO MODEL ///////////////////////////////////////////////////////////
 var Photo = Parse.Object.extend({
-	className: 'Photo',
-	defaults: { caption	: '' }
+	className: 'Photo'
 });
 
 // PHOTO COLLECTION //////////////////////////////////////////////////////
@@ -47,7 +45,7 @@ var PhotoCollection = Parse.Collection.extend({
 
 // USER MODEL ////////////////////////////////////////////////////////////
 var User = Parse.Object.extend({
-	className: 'User',
+	className: 'User'
 });
 
 // USER COLLECTION ///////////////////////////////////////////////////////
