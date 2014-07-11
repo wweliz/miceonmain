@@ -134,7 +134,7 @@ function milesToNearestMouse() {
 }
 
 
-trackUserLocation();
+// trackUserLocation();
 // mouseQuery.find(querySuccess, queryError);
 // findNearestMouse();
 // milesToNearestMouse();

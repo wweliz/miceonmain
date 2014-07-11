@@ -49,8 +49,8 @@ var AppRouter = Parse.Router.extend({
 	checkGeoSuport: function() {
 		if (Modernizr.geolocation) {
 			console.log('This device supports geolocation.');
+			trackUserLocation();
 		} else {
-			// no native support; maybe try a fallback?
 			console.log('This device does not support geolocation.');
 		}
 	},
@@ -91,6 +91,9 @@ var AppRouter = Parse.Router.extend({
 		if (!currentUser){
 			this.redirectToSignup();
 		} else {
+	  	mouseQuery.find(querySuccess, queryError);
+			findNearestMouse();
+			milesToNearestMouse();
 	  	//instantiate the UserHomeView with the current user as the model
 			new UserHomeView({model: Parse.User.current().attributes});
 		}
