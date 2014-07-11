@@ -83,9 +83,9 @@
 
 		<script type="text/template" class="user-home-template">
 			<h1> <%= currentUser.attributes.username %> </h1>
-				<h4 class="ll"> LAT <%= currentUser.attributes.userGeo.latitude %>, LONG <%= currentUser.attributes.userGeo.longitude %> </h4>
+				<h4 class="ll"> LAT <%= userGeoPoint._latitude %>, LONG <%= userGeoPoint._longitude %> </h4>
 			<div class="black-bar"><h2>Closest Mouse</h2></div>
-				<h3> mouseName <%= this.mouseName %> </h3>
+				<h3> mouseName </h3>
 				<h4 class="ll"> LAT , LONG </h4>
 			<div class="black-bar"><h2>Mice Found</h2></div>
 			<div class="black-bar"><h2>Mice Remaining</h2></div>

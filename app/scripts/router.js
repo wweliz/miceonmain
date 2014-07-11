@@ -24,6 +24,7 @@ var AppRouter = Parse.Router.extend({
 		var currentUser = Parse.User.current();
 
 		this.checkGeoSuport();
+		this.fetchMice();
 
 		// if there is a currently logged in user...
 		if (currentUser) {
@@ -50,9 +51,23 @@ var AppRouter = Parse.Router.extend({
 			console.log('This device supports geolocation.');
 		} else {
 			// no native support; maybe try a fallback?
-			alert('This device does not support geolocation.');
 			console.log('This device does not support geolocation.');
 		}
+	},
+
+	////////////////////////////////////////////////////////////////////////
+	// FETCHING THE MOUSE COLLECTION ///////////////////////////////////////
+
+	fetchMice: function(){
+		//fetches the mice collection
+		mice.fetch({
+			success: function(collection){
+				console.log('The mice collection was successfully fetched.');
+			},
+			error: function(collection, error){
+				console.log('The mice collection could not be retrieved.');
+			}
+		});
 	},
 
 	////////////////////////////////////////////////////////////////////////
@@ -73,8 +88,6 @@ var AppRouter = Parse.Router.extend({
   },
 
 	renderUserHome: function(){
-		var currentUser = Parse.User.current();
-
 		if (!currentUser){
 			this.redirectToSignup();
 		} else {
@@ -109,8 +122,6 @@ var AppRouter = Parse.Router.extend({
   },
 
 	renderUserSettings: function(){
-		var currentUser = Parse.User.current();
-
 		if (!currentUser){
 			this.redirectToSignup();
 		} else {
@@ -137,14 +148,5 @@ var AppRouter = Parse.Router.extend({
 });
 
 //instantiate the router
-var router = new AppRouter;
+var router = new AppRouter();
 Parse.history.start();
-
-
-
-// CLEARING THE CURRENT USER & LOGGING OUT ///////////////////////////////
-// $('.logout-btn').click(function() {
-// 	//calls the logout function
-// 	Parse.User.logOut();
-// 	//current user is now null
-// });
