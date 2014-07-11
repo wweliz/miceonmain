@@ -1,10 +1,85 @@
 /* global Parse, _, currentUser */
 'use strict';
 
+//////////////////////////////////////////////////////////////////////////
 // DEFINING UNIVERSAL VARIABLES //////////////////////////////////////////
 var nearbyMice;
 var nearestMouse;
 
+////////////////////////////////////////////////////////////////////////
+// CONVERTING DEGREES TO RADIANS ///////////////////////////////////////
+		//converts latitude and longitude values so that they can be passed
+		//through the Haversine formula
+var radians = function(x) {
+  return x * Math.PI / 180;
+};
+
+//////////////////////////////////////////////////////////////////////////
+// DEFINING THE NEAREST POINT QUERY //////////////////////////////////////
+
+//names the user's geolocation so that it can be passed through a query
+var userGeoPoint = currentUser.attributes.userGeo;
+console.log('userGeoPoint is', userGeoPoint);
+
+//defines a query that is used to fetch PlaceObjects
+var mouseQuery = new Parse.Query(Mouse);
+//tells the query to look for locations near the user
+mouseQuery.withinMiles('mouseGeopoint', userGeoPoint, 10);
+//limits the length of the returned array to 9
+mouseQuery.limit(9);
+//finds all objects that match the restraints of the query
+mouseQuery.find({
+	success: function(queryresults){
+		console.log('Successfully retrieved ' + queryresults.length + ' results.');
+		nearbyMice = new MouseCollection(queryresults);
+	},
+	error: function(error){
+		console.log('There was an error calling the query function.');
+	}
+});
+
+//queryresults will be an array of objects ordered by distance
+//(nearest to farthest) from the user's location
+
+//the object nearest to the user will be the first object in the array
+//var closestMouse = queryresults.first();
+
+//////////////////////////////////////////////////////////////////////////
+// FINDING THE DISTANCE BETWEEN LOCATIONS ////////////////////////////////
+// THE HAVERSINE FORMULA /////////////////////////////////////////////////
+
+var getDistance = function(p1, p2) {
+  //"R" represents Earth’s mean radius in meters
+  var R = 6378137; 
+
+  var dLat = radians(p2.latitude - p1.latitude);
+  var dLong = radians(p2.longitude - p1.longitude);
+
+  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(radians(p1.latitude)) * Math.cos(radians(p2.latitude)) *
+    Math.sin(dLong / 2) * Math.sin(dLong / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  var d = R * c;
+
+  //"d" represents the distance between 2 points in meters
+  return d;
+};
+
+//////////////////////////////////////////////////////////////////////////
+// FINDING THE DISTANCE BETWEEN THE USER AND THE NEAREST MOUSE ///////////
+		//ansynchronus data needs to be ready
+		//run this function when the xx view
+//getDistance(Parse.User.current().get('userGeo'), nearestMouse.get('mouseGeopoint')) * 0.000621371;
+
+
+// CLEARING THE CURRENT USER & LOGGING OUT ///////////////////////////////
+// $('.logout-btn').click(function() {
+// 	//calls the logout function
+// 	Parse.User.logOut();
+// 	//current user is now null
+// });
+
+//////////////////////////////////////////////////////////////////////////
 // THE APP ROUTER ////////////////////////////////////////////////////////
 var AppRouter = Parse.Router.extend({
 	routes: {
@@ -206,15 +281,7 @@ var AppRouter = Parse.Router.extend({
 
 });
 
-//instantiate the router
+//////////////////////////////////////////////////////////////////////////
+// INSTANTIATING THE ROUTER //////////////////////////////////////////////
 var router = new AppRouter;
 Parse.history.start();
-
-
-
-// CLEARING THE CURRENT USER & LOGGING OUT ///////////////////////////////
-// $('.logout-btn').click(function() {
-// 	//calls the logout function
-// 	Parse.User.logOut();
-// 	//current user is now null
-// });
