@@ -3,6 +3,7 @@
 
 var currentUser = Parse.User.current();
 var userGeoPoint;
+var mouseQuery = new Parse.Query(Mouse);
 var nearbyMice;
 var nearestMouse;
 var distToMouse;
@@ -26,6 +27,8 @@ var distToMouse;
 
 //////////////////////////////////////////////////////////////////////////
 // DEFINING THE USER LOCATION SUCCESS CALLBACK ///////////////////////////
+// DEFINING THE NEAREST POINT QUERY //////////////////////////////////////
+
 function geoSuccess(position) {
 	var currentUser = Parse.User.current();
 	var userLatitude = position.coords.latitude;
@@ -33,7 +36,16 @@ function geoSuccess(position) {
 	userGeoPoint = new Parse.GeoPoint({latitude: userLatitude, longitude: userLongitude});
 
 	console.log('Current user location is: latitude:' + userGeoPoint._latitude + ', longitude:'+ userGeoPoint._longitude + '.');
+
+	//tells the query to look for locations within 10 miles of the user
+	mouseQuery.withinMiles('mouseGeopoint', userGeoPoint, 10);
+	//limits the length of the returned array to 9
+	mouseQuery.limit(9);
+	//finds all objects that match the restraints of the query
 }
+
+//queryresults will be an array of objects ordered by distance
+//(nearest to farthest) from the user's location
 
 //////////////////////////////////////////////////////////////////////////
 // DEFINING THE USER LOCATION FAILURE CALLBACK ///////////////////////////
@@ -69,18 +81,6 @@ function querySuccess(queryresults) {
 function queryError(error) {
 	console.log('There was an error calling the query function.');
 }
-
-//////////////////////////////////////////////////////////////////////////
-// DEFINING THE NEAREST POINT QUERY //////////////////////////////////////
-var query = new Parse.Query(Mouse);
-//tells the query to look for locations within 10 miles of the user
-query.withinMiles('mouseGeopoint', userGeoPoint, 10);
-//limits the length of the returned array to 9
-query.limit(9);
-//finds all objects that match the restraints of the query
-
-//queryresults will be an array of objects ordered by distance
-//(nearest to farthest) from the user's location
 
 //////////////////////////////////////////////////////////////////////////
 // CONVERTING DEGREES TO RADIANS /////////////////////////////////////////
@@ -134,7 +134,7 @@ function milesToNearestMouse() {
 }
 
 
-// trackUserLocation();
-// query.find(querySuccess, queryError);
+trackUserLocation();
+// mouseQuery.find(querySuccess, queryError);
 // findNearestMouse();
-// milesToNearestMouse()
+// milesToNearestMouse();
