@@ -27,9 +27,6 @@ var LogInView = Parse.View.extend({
 		//naming the value of the input fields
 		var usernameVal = $('.username-input').val();
 		var passwordVal = $('.password-input').val();
-
-		//sets 'that' to refer to the view so that the view can be removed
-		var that = this;
 		
 		//calls Parse's login function
 		Parse.User.logIn(usernameVal, passwordVal, {
@@ -40,9 +37,6 @@ var LogInView = Parse.View.extend({
 				console.log('Username', user.get('username'), 'is logged in with session token ', userSessionToken);
 
 				router.navigate('userview', {trigger: true});
-
-				//removes the LogInView from the DOM
-				that.remove();
 			},
 
 		  error: function(user, error) {

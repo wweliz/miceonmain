@@ -23,8 +23,6 @@ var MousePhotoView = Parse.View.extend({
 	},
 
 	showMousePhotoGallery: function(){
-		//removes the MousePhotoView from the DOM
-		this.remove();
 		//clicking the View Photo Gallery button with anchor tag redirects to the MouseGalleryView
 	},
 

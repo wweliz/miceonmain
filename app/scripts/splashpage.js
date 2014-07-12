@@ -29,14 +29,10 @@ var SplashView = Parse.View.extend({
 	//view from listening to any bound events
 
 	showSignUpView: function(){
-		//removes the SplashView from the DOM
-		this.remove();
 		//clicking sign up button with anchor tag redirects to the SignUpView
 	},
 
 	showLogInView: function(){
-		//removes the SplashView from the DOM
-		this.remove();
 		//clicking log in button with anchor tag redirects to the LogInView
 	}
 

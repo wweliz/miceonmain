@@ -39,8 +39,6 @@ var SignUpView = Parse.View.extend({
 				hometown: 	hometownVal
 		}).last();
 
-		var that = this;
-
 		//saves added input to the server; when done...
 		user.save().done(function(){
 			//calls Parse's login function
@@ -51,9 +49,6 @@ var SignUpView = Parse.View.extend({
 					console.log('Username', user.get('username'), 'is logged in with session token ', userSessionToken);
 			    
 					router.navigate('userview', {trigger: true});
-
-			    //removes the SignUpView from the DOM
-					that.remove();
 				},
 
 			  error: function(user, error) {
