@@ -23,6 +23,18 @@ a {
 	text-decoration: none;
 }
 
+.menubar {
+	height: 30px;
+	background-color: #2E2E2E;
+	margin: 0;
+	span {
+		font-style: normal;
+		line-height: 30px;
+		color: white;
+		margin: 0 4px 0 4px;
+	}
+}
+
 .main-container {
 	width: 90%;
 	margin: 0 auto;
