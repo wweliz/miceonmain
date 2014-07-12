@@ -57,8 +57,6 @@ function geoError() {
 //////////////////////////////////////////////////////////////////////////
 // DEFINING THE TRACK USER LOCATION FUNCTION /////////////////////////////
 function trackUserLocation() {
-	var currentUser = Parse.User.current();
-
 	// if there is a currently logged in user...
 if (currentUser) {
 		//passes the success and failure callbacks through the watchPosition function

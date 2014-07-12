@@ -18,18 +18,17 @@ var AppRouter = Parse.Router.extend({
 		'micehistory'			: 'renderMiceHistory',			//	url/#micehistory
 		'usersettings'		: 'renderUserSettings',			//	url/#usersettings
 		'congrats'				: 'renderCongrats',					//	url/#congrats		
-		'logout'					: 'renderLogOut'						//	url/#logout
 	},
 
 	initialize: function(){
-		var currentUser = Parse.User.current();
+		//pairs with the swap function
+		this.currentView = null;
 
 		this.checkGeoSuport();
 		this.fetchMice();
 
 		// if there is a currently logged in user...
 		if (currentUser) {
-			this.trackUserLocation();
 			//router redirects to the UserHomeView
 			this.navigate('userview', {trigger: true});
 
@@ -51,7 +50,6 @@ var AppRouter = Parse.Router.extend({
 	checkGeoSuport: function() {
 		if (Modernizr.geolocation) {
 			console.log('This device supports geolocation.');
-			trackUserLocation();
 		} else {
 			console.log('This device does not support geolocation.');
 		}
@@ -59,7 +57,6 @@ var AppRouter = Parse.Router.extend({
 
 	////////////////////////////////////////////////////////////////////////
 	// FETCHING THE MOUSE COLLECTION ///////////////////////////////////////
-
 	fetchMice: function(){
 		//fetches the mice collection
 		mice.fetch({
@@ -75,79 +72,68 @@ var AppRouter = Parse.Router.extend({
 	////////////////////////////////////////////////////////////////////////
 	// RENDERING VIEWS /////////////////////////////////////////////////////
 	renderSplashPage: function(){
-		//instantiate the SplashView
-		new SplashView();
+		this.swap( new SplashView() );
 	},
 
 	renderSignUp: function(){
-		//instantiate the SignUpView
-		new SignUpView();
+		this.swap( new SignUpView() );
 	},
 
 	renderLogIn: function(){
-  	//instantiate the LogInView
-		new LogInView();
+		this.swap( new LogInView() );
   },
 
 	renderUserHome: function(){
 		if (!currentUser){
 			this.redirectToSignup();
 		} else {
-	  	mouseQuery.find(querySuccess, queryError);
-			findNearestMouse();
-			milesToNearestMouse();
 	  	//instantiate the UserHomeView with the current user as the model
-			new UserHomeView({model: Parse.User.current().attributes});
+	  	this.swap( new UserHomeView({model: Parse.User.current().attributes}) );
 		}
   },
 
   renderClosestMouse: function(){
-  	//instantiate the ClosestMouseView
-		new ClosestMouseView();
+  	this.swap( new ClosestMouseView() );
   },
 
   renderSingleMouse: function(){
-  	//instantiate the MousePhotoView
-		new MousePhotoView();
+  	this.swap( new MousePhotoView() );
   },
 
   renderMouseReward: function(){
-  	//instantiate the MouseRewardView
-		new MouseRewardView();
+  	this.swap( new MouseRewardView() );
   },
 
   renderMouseGallery: function(){
-  	//instantiate the MouseGalleryView
-		new MouseGalleryView();
+  	this.swap( new MouseGalleryView() );
   },
 
   renderAllRewards: function(){
-  	//instantiate the AllRewardsView
-		new AllRewardsView();
+		this.swap( new AllRewardsView() );
   },
 
 	renderUserSettings: function(){
 		if (!currentUser){
 			this.redirectToSignup();
 		} else {
-	  	//instantiate the UserSettingsView
-			new UserSettingsView();
+			this.swap( new UserSettingsView() );
 		}
   },
 
   renderMiceHistory: function(){
-		//instantiate the MouseHistoryView
-		new MouseHistoryView();
+		this.swap( new MouseHistoryView() );
   },
 
 	renderCongrats: function(){
-		//instantiate the CongratulationsView
-		new CongratulationsView();
+		this.swap( new CongratulationsView() );
   },
 
-	renderLogOut: function(){
-  	//instantiate the LogOutView
-		new LogOutView();
+  ////////////////////////////////////////////////////////////////////////
+	// SWAP VIEW FUNCTION //////////////////////////////////////////////////
+	swap: function(view){
+    if (this.currentView) this.currentView.remove();
+    this.currentView = view;
+    this.currentView.render();
   }
 
 });
