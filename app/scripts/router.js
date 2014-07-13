@@ -93,23 +93,43 @@ var AppRouter = Parse.Router.extend({
   },
 
   renderClosestMouse: function(){
-  	this.swap( new ClosestMouseView() );
+		if ( Parse.User.current() == null ){
+			this.redirectToSignup();
+		} else {
+			this.swap( new ClosestMouseView() );
+		}
   },
 
   renderSingleMouse: function(){
-  	this.swap( new MousePhotoView() );
+  	if ( Parse.User.current() == null ){
+			this.redirectToSignup();
+		} else {
+			this.swap( new MousePhotoView() );
+		}
   },
 
   renderMouseReward: function(){
-  	this.swap( new MouseRewardView() );
+  	if ( Parse.User.current() == null ){
+			this.redirectToSignup();
+		} else {
+			this.swap( new MouseRewardView() );
+		}
   },
 
   renderMouseGallery: function(){
-  	this.swap( new MouseGalleryView() );
+  	if ( Parse.User.current() == null ){
+			this.redirectToSignup();
+		} else {
+			this.swap( new MouseGalleryView() );
+		}
   },
 
   renderAllRewards: function(){
-		this.swap( new AllRewardsView() );
+  	if ( Parse.User.current() == null ){
+			this.redirectToSignup();
+		} else {
+			this.swap( new AllRewardsView() );
+		}
   },
 
 	renderUserSettings: function(){

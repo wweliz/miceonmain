@@ -37,6 +37,8 @@ var User = Parse.Object.extend({
 	className: 'User'
 });
 
+var currentUser = Parse.User.current();
+
 // USER COLLECTION ///////////////////////////////////////////////////////
 var UserCollection = Parse.Collection.extend({
 	model: User

@@ -1,6 +1,7 @@
 //////////////////////////////////////////////////////////////////////////
 // THE HOME BUTTON ///////////////////////////////////////////////////////
 $('.home-btn').click(function() {
+	console.log('Home button clicked.');
 	// if there is a currently logged in user...
 	if ( Parse.User.current() ) {
 		//router redirects to the UserHomeView
@@ -16,9 +17,9 @@ $('.home-btn').click(function() {
 //////////////////////////////////////////////////////////////////////////
 // THE LOG OUT BUTTON ////////////////////////////////////////////////////
 $('.logout-btn').click(function() {
-	Parse.User.logOut();
-	//current user is now null
+	console.log('Log out button clicked.');
 
+	Parse.User.logOut();
 	//router redirects to the SplashView
 	router.navigate('', {trigger: true});
 });
@@ -26,6 +27,7 @@ $('.logout-btn').click(function() {
 //////////////////////////////////////////////////////////////////////////
 // THE USER SETTINGS BUTTON //////////////////////////////////////////////
 $('.settings-btn').click(function() {
+	console.log('Settings button clicked.');
 	// if there is a currently logged in user...
 	if ( Parse.User.current() ) {
 		//router redirects to the UserHomeView
@@ -41,6 +43,7 @@ $('.settings-btn').click(function() {
 //////////////////////////////////////////////////////////////////////////
 // THE PHOTO GALLERY BUTTON //////////////////////////////////////////////
 $('.photo-gallery-btn').click(function() {
+	console.log('Photos button clicked.');
 	// if there is a currently logged in user...
 	if ( Parse.User.current() ) {
 		//router redirects to the UserHomeView
@@ -56,6 +59,7 @@ $('.photo-gallery-btn').click(function() {
 //////////////////////////////////////////////////////////////////////////
 // THE REWARDS GALLERY BUTTON ////////////////////////////////////////////
 $('.reward-gallery-btn').click(function() {
+	console.log('Rewards button clicked.');
 	// if there is a currently logged in user...
 	if ( Parse.User.current() ) {
 		//router redirects to the UserHomeView
@@ -71,6 +75,7 @@ $('.reward-gallery-btn').click(function() {
 //////////////////////////////////////////////////////////////////////////
 // THE NEAREST MOUSE BUTTON //////////////////////////////////////////////
 $('.nearest-mouse-btn').click(function() {
+	console.log('Nearest mouse button clicked.');
 	// if there is a currently logged in user...
 	if ( Parse.User.current() ) {
 		//router redirects to the UserHomeView
@@ -86,5 +91,6 @@ $('.nearest-mouse-btn').click(function() {
 //////////////////////////////////////////////////////////////////////////
 // THE MOUSE HISTORY BUTTON //////////////////////////////////////////////
 $('.history-btn').click(function() {
+	console.log('Mouse history button clicked.');
 	router.navigate('micehistory', {trigger: true});
 });
