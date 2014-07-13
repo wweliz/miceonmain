@@ -32,7 +32,7 @@ var SignUpView = Parse.View.extend({
 
 		//creates a user instance; adds that instance to the users collection
 		//sets the properties of that user to be the value of the input fields
-		var user = users.set({
+		var user = users.add({
 				username:		usernameVal,
 				email:			emailVal,
 				password:		passwordVal,
@@ -44,7 +44,6 @@ var SignUpView = Parse.View.extend({
 			//calls Parse's login function
 			Parse.User.logIn(usernameVal, passwordVal, {
 			  success: function(user) {
-			  	window.currentUser = Parse.User.current();
 			  	var userSessionToken = Parse.User.current()._sessionToken;
 					console.log('Username', user.get('username'), 'is logged in with session token ', userSessionToken);
 			    

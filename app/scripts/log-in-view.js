@@ -12,7 +12,7 @@ var LogInView = Parse.View.extend({
 
 	initialize: function(){
 		//appends login-view div with contents of the login-template
-		$('.login-view').append(this.el);
+		$('.login-view').html(this.el);
 
 		//calls the render function
 		this.render();
@@ -31,8 +31,6 @@ var LogInView = Parse.View.extend({
 		//calls Parse's login function
 		Parse.User.logIn(usernameVal, passwordVal, {
 		  success: function(user) {
-		  	//defines the current user and that user's session token
-		  	window.currentUser = Parse.User.current();
 		  	var userSessionToken = Parse.User.current()._sessionToken;
 				console.log('Username', user.get('username'), 'is logged in with session token ', userSessionToken);
 
