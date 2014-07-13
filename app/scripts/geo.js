@@ -1,7 +1,7 @@
 /* global Parse, _ */
 'use strict';
 
-var currentUser = Parse.User.current();
+//var currentUser = Parse.User.current();
 var userGeoPoint;
 var mouseQuery = new Parse.Query(Mouse);
 var nearbyMice;
@@ -30,7 +30,6 @@ var distToMouse;
 // DEFINING THE NEAREST POINT QUERY //////////////////////////////////////
 
 function geoSuccess(position) {
-	var currentUser = Parse.User.current();
 	var userLatitude = position.coords.latitude;
 	var userLongitude = position.coords.longitude;
 	userGeoPoint = new Parse.GeoPoint({latitude: userLatitude, longitude: userLongitude});
@@ -58,7 +57,7 @@ function geoError() {
 // DEFINING THE TRACK USER LOCATION FUNCTION /////////////////////////////
 function trackUserLocation() {
 	// if there is a currently logged in user...
-if (currentUser) {
+if ( Parse.User.current() ) {
 		//passes the success and failure callbacks through the watchPosition function
 			navigator.geolocation.watchPosition(geoSuccess, geoError, {enableHighAccuracy: true});
 	// if there is NOT a currently logged in user...

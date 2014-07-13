@@ -23,11 +23,6 @@ var SplashView = Parse.View.extend({
 		return this;
 	},
 
-	//because SplashView has no models or collections, the view can simply
-	//be removed rather than destroyed
-	//removing a view from the DOM calls stopListening, which stops the
-	//view from listening to any bound events
-
 	showSignUpView: function(){
 		//clicking sign up button with anchor tag redirects to the SignUpView
 	},

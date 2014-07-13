@@ -2,7 +2,7 @@
 // THE HOME BUTTON ///////////////////////////////////////////////////////
 $('.home-btn').click(function() {
 	// if there is a currently logged in user...
-	if (currentUser) {
+	if ( Parse.User.current() ) {
 		//router redirects to the UserHomeView
 		router.navigate('userview', {trigger: true});
 
@@ -27,7 +27,7 @@ $('.logout-btn').click(function() {
 // THE USER SETTINGS BUTTON //////////////////////////////////////////////
 $('.settings-btn').click(function() {
 	// if there is a currently logged in user...
-	if (currentUser) {
+	if ( Parse.User.current() ) {
 		//router redirects to the UserHomeView
 		router.navigate('usersettings', {trigger: true});
 
@@ -42,7 +42,7 @@ $('.settings-btn').click(function() {
 // THE PHOTO GALLERY BUTTON //////////////////////////////////////////////
 $('.photo-gallery-btn').click(function() {
 	// if there is a currently logged in user...
-	if (currentUser) {
+	if ( Parse.User.current() ) {
 		//router redirects to the UserHomeView
 		router.navigate('mousegallery', {trigger: true});
 
@@ -57,7 +57,7 @@ $('.photo-gallery-btn').click(function() {
 // THE REWARDS GALLERY BUTTON ////////////////////////////////////////////
 $('.reward-gallery-btn').click(function() {
 	// if there is a currently logged in user...
-	if (currentUser) {
+	if ( Parse.User.current() ) {
 		//router redirects to the UserHomeView
 		router.navigate('rewardgallery', {trigger: true});
 
@@ -72,7 +72,7 @@ $('.reward-gallery-btn').click(function() {
 // THE NEAREST MOUSE BUTTON //////////////////////////////////////////////
 $('.nearest-mouse-btn').click(function() {
 	// if there is a currently logged in user...
-	if (currentUser) {
+	if ( Parse.User.current() ) {
 		//router redirects to the UserHomeView
 		router.navigate('mouseview', {trigger: true});
 

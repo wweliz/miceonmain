@@ -28,15 +28,14 @@ var UserSettingsView = Parse.View.extend({
 		var emailVal = $('.email-input').val();
 		var passwordVal = $('.password-input').val();
 
-		//sets the properties and values of the users
-		var currentUser = Parse.User.current();
-		currentUser.set({
+		//sets the properties and values of the current user
+		Parse.User.current().set({
 				email:		emailVal,
 				password:	passwordVal
 		});
 
 		//saves the current user in Parse database
-		currentUser.save();
+		Parse.User.current().save();
 	}
 
 });

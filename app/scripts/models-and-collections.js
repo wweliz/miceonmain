@@ -48,15 +48,13 @@ var UserCollection = Parse.Collection.extend({
 // RELATIONAL DATA ///////////////////////////////////////////////////////
 
 // USER-TO RELATIONS /////////////////////////////////////////////////////
-var currentUser = Parse.User.current();
-
-var userMouseRelation = currentUser.relation('miceFound');
+var userMouseRelation = Parse.User.current().relation('miceFound');
 userMouseRelation.add(Mouse);
 
-var userPhotoRelation = currentUser.relation('photosUploaded');
+var userPhotoRelation = Parse.User.current().relation('photosUploaded');
 userPhotoRelation.add(Photo);
 
-//currentUser.save();
+//Parse.User.current().save();
 
 // MOUSE-TO RELATIONS ////////////////////////////////////////////////////
 var photo = new Photo();

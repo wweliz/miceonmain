@@ -28,7 +28,7 @@ var AppRouter = Parse.Router.extend({
 		this.fetchMice();
 
 		// if there is a currently logged in user...
-		if (currentUser) {
+		if ( Parse.User.current() ) {
 			//router redirects to the UserHomeView
 			this.navigate('userview', {trigger: true});
 
@@ -42,7 +42,7 @@ var AppRouter = Parse.Router.extend({
 	////////////////////////////////////////////////////////////////////////
 	// REDIRECT TO SIGN UP IF NO CURRENT USER //////////////////////////////
   redirectToSignup: function(){
-  	router.navigate('signup', {trigger: true});
+  	this.navigate('signup', {trigger: true});
   },
 
 	////////////////////////////////////////////////////////////////////////
@@ -84,7 +84,7 @@ var AppRouter = Parse.Router.extend({
   },
 
 	renderUserHome: function(){
-		if (!currentUser){
+		if ( Parse.User.current() == null ){
 			this.redirectToSignup();
 		} else {
 	  	//instantiate the UserHomeView with the current user as the model
@@ -113,7 +113,7 @@ var AppRouter = Parse.Router.extend({
   },
 
 	renderUserSettings: function(){
-		if (!currentUser){
+		if ( Parse.User.current() == null ){
 			this.redirectToSignup();
 		} else {
 			this.swap( new UserSettingsView() );
@@ -131,9 +131,12 @@ var AppRouter = Parse.Router.extend({
   ////////////////////////////////////////////////////////////////////////
 	// SWAP VIEW FUNCTION //////////////////////////////////////////////////
 	swap: function(view){
-    if (this.currentView) this.currentView.remove();
-    this.currentView = view;
-    this.currentView.render();
+    if (this.currentView)
+    	this.currentView.remove();
+    		//removing a view from the DOM calls stopListening, which stops
+    		//the view from listening to any bound events
+    	this.currentView = view;
+    	this.currentView.render();
   }
 
 });
