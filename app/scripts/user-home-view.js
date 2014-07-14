@@ -12,9 +12,6 @@ var UserHomeView = Parse.View.extend({
 	initialize: function(){
 		//appends home-view div with contents of the user-home-template
 		$('.home-view').append(this.el);
-
-		//calls the render function
-		this.render();
 	},
 
 	render: function(){

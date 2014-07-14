@@ -1,4 +1,4 @@
-/* global Parse, _, currentUser */
+/* global Parse, _ */
 'use strict';
 
 //////////////////////////////////////////////////////////////////////////
@@ -37,6 +37,11 @@ var AppRouter = Parse.Router.extend({
 			//router redirects to the SplashView
 			this.navigate('', {trigger: true});
 		}
+
+		// create a deferred that some views will depend on resolution for.
+		window.trackingPromise = $.Deferred();
+		//calls the render function (this will resolve trackingPromise when done)
+		trackUserLocation();
 	},
 
 	////////////////////////////////////////////////////////////////////////
@@ -84,20 +89,25 @@ var AppRouter = Parse.Router.extend({
   },
 
 	renderUserHome: function(){
-		if ( Parse.User.current() == null ){
-			this.redirectToSignup();
-		} else {
-	  	//instantiate the UserHomeView with the current user as the model
-	  	this.swap( new UserHomeView({model: Parse.User.current().attributes}) );
-		}
+		trackingPromise.done(function(){
+			if ( Parse.User.current() == null ){
+				this.redirectToSignup();
+			} else {
+		  	//instantiate the UserHomeView with the current user as the model
+		  	this.swap( new UserHomeView({model: Parse.User.current().attributes}) );
+			}
+		}.bind(this))
   },
 
   renderClosestMouse: function(){
-		if ( Parse.User.current() == null ){
-			this.redirectToSignup();
-		} else {
-			this.swap( new ClosestMouseView() );
-		}
+  	trackingPromise.done(function(){
+			if ( Parse.User.current() == null ){
+				this.redirectToSignup();
+			} else {
+				this.swap( new ClosestMouseView() );
+			}
+		}.bind(this))
+
   },
 
   renderSingleMouse: function(){

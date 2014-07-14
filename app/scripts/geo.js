@@ -40,6 +40,8 @@ function geoSuccess(position) {
 	//limits the length of the returned array to 9
 	mouseQuery.limit(9);
 	//finds all objects that match the restraints of the query
+	mouseQuery.find(querySuccess, queryError);
+
 }
 
 //queryresults will be an array of objects ordered by distance
@@ -70,6 +72,7 @@ if ( Parse.User.current() ) {
 function querySuccess(queryresults) {
 	console.log('Successfully retrieved ' + queryresults.length + ' results.');
 	nearbyMice = new MouseCollection(queryresults);
+	findNearestMouse();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -118,6 +121,8 @@ function findNearestMouse() {
   	return getDistance(userGeoPoint, mouse.get('mouseGeopoint')) * 0.000621371;
 	});
 
+	milesToNearestMouse();
+
 	console.log('The nearest mouse is ' + nearestMouse.attributes.mouseName + '.');
 }
 
@@ -127,10 +132,6 @@ function milesToNearestMouse() {
 		// 1 meter = 0.000621371 miles
 	distToMouse = getDistance(userGeoPoint, nearestMouse.get('mouseGeopoint')) * 0.000621371;
 	console.log(nearestMouse.attributes.mouseName + distToMouse + ' miles away.');
+
+	window.trackingPromise.resolve();
 }
-
-
-// trackUserLocation();
-// mouseQuery.find(querySuccess, queryError);
-// findNearestMouse();
-// milesToNearestMouse();
