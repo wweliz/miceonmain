@@ -14,6 +14,10 @@ var ClosestMouseView = Parse.View.extend({
 		//appends mouse-view div with contents of the user-home-template
 		$('.closest-mouse-view').append(this.el);
 		//render called inside of swap function
+
+		$(document).ready(function(){
+			$("#takePictureField").on("change",this.gotPic);
+		});
 	},
 
 	render: function(){
@@ -23,6 +27,13 @@ var ClosestMouseView = Parse.View.extend({
 
 	uploadMousePhoto: function(){
 		//do things
+	},
+
+	gotPic: function(event){
+		if(event.target.files.length == 1 && 
+			event.target.files[0].type.indexOf("image/") == 0) {
+				$("#yourimage").attr("src",URL.createObjectURL(event.target.files[0]));
+			}
 	}
 
 });
