@@ -31,10 +31,10 @@ var SignUpView = Parse.View.extend({
 		//creates a user instance; adds that instance to the users collection
 		//sets the properties of that user to be the value of the input fields
 		var user = users.add({
-				username:		usernameVal,
-				email:			emailVal,
-				password:		passwordVal,
-				hometown: 	hometownVal
+			username:		usernameVal,
+			email:			emailVal,
+			password:		passwordVal,
+			hometown: 	hometownVal,
 		}).last();
 
 		//saves added input to the server; when done...
