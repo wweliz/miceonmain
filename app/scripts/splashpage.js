@@ -6,10 +6,9 @@ var SplashView = Parse.View.extend({
 
 	splashTemplate: _.template($('.splash-template').text()),
 
-	events: {
-		'click .show-signup-btn': 'showSignUpView',
-		'click .show-login-btn'	: 'showLogInView',
-	},
+	// EVENTS:
+	// clicking sign up button with anchor tag redirects to the SignUpView
+	// clicking log in button with anchor tag redirects to the LogInView
 
 	initialize: function(){
 		//appends splash-view div with contents of the splash-template
@@ -20,14 +19,6 @@ var SplashView = Parse.View.extend({
 	render: function(){
 		this.$el.html(this.splashTemplate);
 		return this;
-	},
-
-	showSignUpView: function(){
-		//clicking sign up button with anchor tag redirects to the SignUpView
-	},
-
-	showLogInView: function(){
-		//clicking log in button with anchor tag redirects to the LogInView
 	}
 
 });

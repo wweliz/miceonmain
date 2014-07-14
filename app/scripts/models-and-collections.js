@@ -1,4 +1,4 @@
-/* global Parse, _*/
+/* global Parse, _ */
 'use strict';
 
 //initializing Parse

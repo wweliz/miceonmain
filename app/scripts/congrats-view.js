@@ -3,6 +3,7 @@
 
 // CONGRATULATIONS VIEW //////////////////////////////////////////////////
 var CongratulationsView = Parse.View.extend({
+	
 	congratsTemplate: _.template($('.congrats-template').text()),
 
 	initialize: function(){

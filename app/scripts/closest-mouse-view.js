@@ -1,14 +1,9 @@
 /* global Parse, _ */
 'use strict';
 
-// <h1> <%= closestMouse.attributes.mouseName %> </h1>
-// <h3> <%= closestMouse.attributes.mouseGeopoint %> </h3>
-// <p> <%= closestMouse.attributes.mouseHint %> </p>
-
 // CLOSEST MOUSE VIEW ////////////////////////////////////////////////////
-
-
 var ClosestMouseView = Parse.View.extend({
+
 	mouseTemplate: _.template($('.mouse-view-template').text()),
 
 	events: {
