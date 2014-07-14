@@ -8,9 +8,7 @@ var CongratulationsView = Parse.View.extend({
 	initialize: function(){
 		//appends congrats-view div with contents of the congrats-template
 		$('.congrats-view').append(this.el);
-
-		//calls the render function
-		this.render();
+		//render called inside of swap function
 	},
 
 	render: function(){

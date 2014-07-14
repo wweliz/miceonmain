@@ -13,9 +13,7 @@ var UserSettingsView = Parse.View.extend({
 	initialize: function(){
 		//appends settings-view div with contents of the user-settings-template
 		$('.settings-view').append(this.el);
-
-		//calls the render function
-		this.render();
+		//render called inside of swap function
 	},
 
 	render: function(){

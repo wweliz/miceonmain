@@ -18,9 +18,7 @@ var ClosestMouseView = Parse.View.extend({
 	initialize: function(){
 		//appends mouse-view div with contents of the user-home-template
 		$('.closest-mouse-view').append(this.el);
-
-		//calls the render function
-		this.render();
+		//render called inside of swap function
 	},
 
 	render: function(){

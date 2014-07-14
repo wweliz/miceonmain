@@ -13,9 +13,7 @@ var SignUpView = Parse.View.extend({
 	initialize: function(){
 		//appends signup-view div with contents of the signup-template
 		$('.signup-view').html(this.el);
-
-		//calls the render function
-		this.render();
+		//render called inside of swap function
 	},
 
 	render: function(){

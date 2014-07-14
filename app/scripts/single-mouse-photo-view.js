@@ -12,9 +12,7 @@ var MousePhotoView = Parse.View.extend({
 	initialize: function(){
 		//appends single-photo-view div with contents of the photo-template
 		$('.single-photo-view').append(this.el);
-
-		//calls the render function
-		this.render();
+		//render called inside of swap function
 	},
 
 	render: function(){

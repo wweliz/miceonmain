@@ -12,9 +12,7 @@ var AllRewardsView = Parse.View.extend({
 	initialize: function(){
 		//appends all-rewards-view div with contents of the all-rewards-template
 		$('.all-rewards-view').append(this.el);
-
-		//calls the render function
-		this.render();
+		//render called inside of swap function
 	},
 
 	render: function(){

@@ -13,9 +13,7 @@ var MouseHistoryView = Parse.View.extend({
 	initialize: function(){
 		//appends history-view div with contents of the history-template
 		$('.history-view').html(this.el);
-
-		//calls the render function
-		this.render();
+		//render called inside of swap function
 	},
 
 	render: function(){

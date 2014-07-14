@@ -13,9 +13,7 @@ var LogInView = Parse.View.extend({
 	initialize: function(){
 		//appends login-view div with contents of the login-template
 		$('.login-view').html(this.el);
-
-		//calls the render function
-		this.render();
+		//render called inside of swap function
 	},
 
 	render: function(){

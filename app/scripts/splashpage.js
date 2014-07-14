@@ -14,8 +14,7 @@ var SplashView = Parse.View.extend({
 	initialize: function(){
 		//appends splash-view div with contents of the splash-template
 		$('.splash-view').append(this.el);
-		//calls the render function
-		this.render();
+		//render called inside of swap function
 	},
 
 	render: function(){
