@@ -1,6 +1,8 @@
 /* global Parse, _ */
 'use strict';
 
+var numberOfPhotos;
+
 // CLOSEST MOUSE VIEW ////////////////////////////////////////////////////
 var ClosestMouseView = Parse.View.extend({
 
@@ -52,15 +54,35 @@ var ClosestMouseView = Parse.View.extend({
 				//the Photo constructor is an extension of Parse.Object
 			uploadedPhoto.save().done(function() {
 				//creates a relation between the current user and photosUploaded
-				//adds the photo just uploaded byt the current user to the relation
+				//adds the uploaded photo to the relation
 				Parse.User.current().relation('photosUploaded').add(uploadedPhoto);
 				//saves the current user
-				Parse.User.current().save();
+				Parse.User.current().save()
+
+				//creates a relation between the nearest mouse and photosUploaded
+				//adds the uploaded photo to the relation
+				nearestMouse.relation('photosUploaded').add(uploadedPhoto);
+				nearestMouse.save();
+
+				this.awardCheese();
 			});
 
 		}, function(error) {
   		console.log('The file either could not be read, or could not be saved to Parse.');
 		});
-	}
+	},
+
+	awardCheese: function(){
+		//queries to find the number of photos uploaded for the nearest mouse
+		nearestMouse.relation('photosUploaded').query().find().done(function(data){
+			numberOfPhotos = data.length
+		});
+
+		if( numberOfPhotos >= 1 ) {
+				console.log('congratulations! you found', nearestMouse.attributes.mouseName);
+		} else {
+			console.log('No photos uploaded for this mouse yet.');
+		}
+	},
 
 });

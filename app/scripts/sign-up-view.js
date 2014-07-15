@@ -30,28 +30,24 @@ var SignUpView = Parse.View.extend({
 
 		//creates a user instance; adds that instance to the users collection
 		//sets the properties of that user to be the value of the input fields
-		var user = users.add({
-			username:		usernameVal,
-			email:			emailVal,
-			password:		passwordVal,
-			hometown: 	hometownVal,
-		}).last();
+		var user = new Parse.User()
+		user.set({
+			"username":		usernameVal,
+			"email":			emailVal,
+			"password":		passwordVal,
+			"hometown": 	hometownVal
+		})
 
 		//saves added input to the server; when done...
-		user.save().done(function(){
-			//calls Parse's login function
-			Parse.User.logIn(usernameVal, passwordVal, {
-			  success: function(user) {
-			  	console.log('Username', user.get('username'), 'is logged in.');
-					router.navigate('userview', {trigger: true});
-				},
-
-			  error: function(user, error) {
-			  	alert('Error: Sign up failed.');
-			  	console.log('User not logged in.');
-					//user stays on the signup page
-			  }
-			});
+		user.signUp(null, {
+			success: function(user) {
+    	// Hooray! Let them use the app now.
+    		router.navigate('/userview', {trigger: true})
+  		},
+  		error: function(user, error) {
+    	// Show the error message somewhere and let the user try again.
+    	alert("Error: " + error.code + " " + error.message);
+  		}
 		});
 	}
 
