@@ -29,9 +29,7 @@ var LogInView = Parse.View.extend({
 		//calls Parse's login function
 		Parse.User.logIn(usernameVal, passwordVal, {
 		  success: function(user) {
-		  	var userSessionToken = Parse.User.current()._sessionToken;
-				console.log('Username', user.get('username'), 'is logged in with session token ', userSessionToken);
-
+				console.log('Username', user.get('username'), 'is logged in.');
 				router.navigate('userview', {trigger: true});
 			},
 

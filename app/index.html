@@ -105,12 +105,8 @@
 			<h1> <%= nearestMouse.attributes.mouseName %> </h1>
 			<h4 class="ll"> LAT <%= nearestMouse.attributes.mouseGeopoint._latitude %>, LONG <%= nearestMouse.attributes.mouseGeopoint._longitude %> </h4>
 			<p> <%= nearestMouse.attributes.mouseHint %> </p>
-
 			<input type="file" capture="camera" accept="image/*" id="takePictureField">
-			<img id="yourimage">
-
 			<span class="upload-mouse-photo-btn button">Upload Mouse Photo</span>
-
 		</script>
 
 		<script type="text/template" class="photo-template">

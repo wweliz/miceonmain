@@ -16,7 +16,7 @@ var ClosestMouseView = Parse.View.extend({
 		//render called inside of swap function
 
 		$(document).ready(function(){
-			$("#takePictureField").on("change",this.gotPic);
+			$('#takePictureField').on('change',this.gotPic);
 		});
 	},
 
@@ -26,20 +26,27 @@ var ClosestMouseView = Parse.View.extend({
 	},
 
 	uploadMousePhoto: function(){
-		var fileUploadControl = $("#takePictureField")[0];
+		var fileUploadControl = $('#takePictureField')[0];
+		
 		if (fileUploadControl.files.length > 0) {
 			var file = fileUploadControl.files[0];
-			var name = "photo.jpg";
+			var name = 'photo.jpg';
 			var parseFile = new Parse.File(name, file);
 		}
 
-		parseFile.save().then(function() {
-  		console.log('The file has been saved to Parse.');
-
-  		var uploadedPhoto = new Parse.Object('Photo');
+		//saves the uploaded image as a ParseFile to Parse
+		parseFile.save().done(function() {
+  		//creates a new photo instance using the parseFile
+  		var uploadedPhoto = new Photo();
 			uploadedPhoto.set('imgFile', parseFile);
+			
+			//saves the uploaded image as a Parse.Object to Parse
+				//the Photo constructor is an extension of Parse.Object
 			uploadedPhoto.save().done(function() {
-				console.log('The uploaded file has been saved to Parse.');
+				//creates a relation between the current user and uploaded photos
+				var relation = Parse.User.current().relation('photosUploaded');
+				//saves the current user
+				Parse.User.current().save();
 			});
 
 		}, function(error) {
@@ -49,8 +56,8 @@ var ClosestMouseView = Parse.View.extend({
 
 	gotPic: function(event){
 		if(event.target.files.length == 1 && 
-			event.target.files[0].type.indexOf("image/") == 0) {
-				$("#yourimage").attr("src",URL.createObjectURL(event.target.files[0]));
+			event.target.files[0].type.indexOf('image/') == 0) {
+				$('#yourimage').attr('src',URL.createObjectURL(event.target.files[0]));
 			}
 	}
 

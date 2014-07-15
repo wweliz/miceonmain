@@ -1,4 +1,4 @@
-/* global Parse, _ */
+/* global Parse */
 'use strict';
 
 //////////////////////////////////////////////////////////////////////////
@@ -54,7 +54,7 @@ var AppRouter = Parse.Router.extend({
 	// DETERMINING DEVICE SUPPORT FOR GEOLOCATION //////////////////////////
 	checkGeoSuport: function() {
 		if (Modernizr.geolocation) {
-			console.log('This device supports geolocation.');
+			//console.log('This device supports geolocation.');
 		} else {
 			console.log('This device does not support geolocation.');
 		}
@@ -66,7 +66,7 @@ var AppRouter = Parse.Router.extend({
 		//fetches the mice collection
 		mice.fetch({
 			success: function(collection){
-				console.log('The mice collection was successfully fetched.');
+				//console.log('The mice collection was successfully fetched.');
 			},
 			error: function(collection, error){
 				console.log('The mice collection could not be retrieved.');
@@ -90,28 +90,28 @@ var AppRouter = Parse.Router.extend({
 
 	renderUserHome: function(){
 		trackingPromise.done(function(){
-			if ( Parse.User.current() == null ){
+			if ( Parse.User.current() === null ){
 				this.redirectToSignup();
 			} else {
 		  	//instantiate the UserHomeView with the current user as the model
 		  	this.swap( new UserHomeView({model: Parse.User.current().attributes}) );
 			}
-		}.bind(this))
+		}.bind(this));
   },
 
   renderClosestMouse: function(){
   	trackingPromise.done(function(){
-			if ( Parse.User.current() == null ){
+			if ( Parse.User.current() === null ){
 				this.redirectToSignup();
 			} else {
 				this.swap( new ClosestMouseView() );
 			}
-		}.bind(this))
+		}.bind(this));
 
   },
 
   renderSingleMouse: function(){
-  	if ( Parse.User.current() == null ){
+  	if ( Parse.User.current() === null ){
 			this.redirectToSignup();
 		} else {
 			this.swap( new MousePhotoView() );
@@ -119,7 +119,7 @@ var AppRouter = Parse.Router.extend({
   },
 
   renderMouseReward: function(){
-  	if ( Parse.User.current() == null ){
+  	if ( Parse.User.current() === null ){
 			this.redirectToSignup();
 		} else {
 			this.swap( new MouseRewardView() );
@@ -127,7 +127,7 @@ var AppRouter = Parse.Router.extend({
   },
 
   renderMouseGallery: function(){
-  	if ( Parse.User.current() == null ){
+  	if ( Parse.User.current() === null ){
 			this.redirectToSignup();
 		} else {
 			this.swap( new MouseGalleryView() );
@@ -135,7 +135,7 @@ var AppRouter = Parse.Router.extend({
   },
 
   renderAllRewards: function(){
-  	if ( Parse.User.current() == null ){
+  	if ( Parse.User.current() === null ){
 			this.redirectToSignup();
 		} else {
 			this.swap( new AllRewardsView() );
@@ -143,7 +143,7 @@ var AppRouter = Parse.Router.extend({
   },
 
 	renderUserSettings: function(){
-		if ( Parse.User.current() == null ){
+		if ( Parse.User.current() === null ){
 			this.redirectToSignup();
 		} else {
 			this.swap( new UserSettingsView() );
