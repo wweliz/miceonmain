@@ -115,20 +115,22 @@ Parse.User.current().relation('miceFound').query().find().done(function(queryres
 			return mice.get(id);
 		})
 	
-	console.log('foundMice is ', foundMice);
+	//console.log('foundMice is ', foundMice);
 	var coolTemplate = _.template($("#indiv-found-mouse").text())
-	console.log("mouse template is"+ coolTemplate) 
 	document.addEventListener("RenderMeow", function(){
-		console.log("caught that there event")
+		//console.log("caught that there event")
 		_.each(foundMice, function(mouse){
 			$(".mice-found-target").append(coolTemplate({mouse: mouse}))
-
 		})
-
 	})
 
-
-
-	console.log('missingMice is ', missingMice);
+	//console.log('missingMice is ', missingMice);
+	var missingMiceTemplate = _.template($("#indiv-remaining-mouse").text())
+	document.addEventListener("RenderMeow", function(){
+		//console.log("caught that there event")
+		_.each(missingMice, function(mouse){
+			$(".mice-remaining-target").append(missingMiceTemplate({mouse: mouse}))
+		})
+	})
 
 });
