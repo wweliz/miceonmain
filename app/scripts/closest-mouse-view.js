@@ -64,26 +64,11 @@ var ClosestMouseView = Parse.View.extend({
 				//adds the uploaded photo to the relation
 				nearestMouse.relation('photosUploaded').add(uploadedPhoto);
 				nearestMouse.save();
-
-				this.awardCheese();
 			});
 
 		}, function(error) {
   		console.log('The file either could not be read, or could not be saved to Parse.');
 		});
-	},
-
-	awardCheese: function(){
-		//queries to find the number of photos uploaded for the nearest mouse
-		nearestMouse.relation('photosUploaded').query().find().done(function(data){
-			numberOfPhotos = data.length
-		});
-
-		if( numberOfPhotos >= 1 ) {
-				console.log('congratulations! you found', nearestMouse.attributes.mouseName);
-		} else {
-			console.log('No photos uploaded for this mouse yet.');
-		}
-	},
+	}
 
 });
