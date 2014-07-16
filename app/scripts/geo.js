@@ -1,11 +1,16 @@
 /* global Parse, _ */
 'use strict';
 
-var userGeoPoint;
-var mouseQuery = new Parse.Query(Mouse);
-var nearbyMice;
-var nearestMouse;
-var distToMouse;
+var userGeoPoint,
+		mouseQuery = new Parse.Query(Mouse),
+		nearbyMice,
+		nearestMouse,
+		distToMouse,
+		foundMice,
+		foundMiceIds,
+		allMiceIds,
+		diffIds,
+		missingMice;
 
 //////////////////////////////////////////////////////////////////////////
 // DEFINING THE QUERY SUCCESS CALLBACK ///////////////////////////////////
@@ -78,36 +83,31 @@ function milesToNearestMouse() {
 
 //////////////////////////////////////////////////////////////////////////
 // FOUND MICE & REMAINING MICE QUERY /////////////////////////////////////
-var foundMice;
-var foundMiceIds;
-var allMiceIds;
-var diffIds;
-var missingMice;
 
 Parse.User.current().relation('miceFound').query().find().done(function(queryresults){
 	//foundMice will be a collection of found mice
 	foundMice = queryresults;
 	// this is a global promise for when the mice are fetched
+		console.log('foundMice is', foundMice);
 	return miceFetched;
 
-}).done(function(mice){
-	//foundMiceIds will be an array of the found mice ids
-	foundMiceIds = _.pluck(foundMice, "id");
+	}).done(function(mice){
+		//foundMiceIds will be an array of the found mice ids
+		foundMiceIds = _.pluck(foundMice, "id");
+		console.log('foundMiceIds is', foundMiceIds);
 
-	//allMiceIds will be an array of all the mice ids
-	allMiceIds = _.pluck(mice.models, "id");
+		//allMiceIds will be an array of all the mice ids
+		allMiceIds = _.pluck(mice.models, "id");
+		console.log('allMiceIds is', allMiceIds);
 
-	//diffIds will be an array of the remaining (not found) mice ids
-	diffIds = _.difference(allMiceIds, foundMiceIds);
+		//diffIds will be an array of the remaining (not found) mice ids
+		diffIds = _.difference(allMiceIds, foundMiceIds);
+		console.log('diffIds is', diffIds);
 
-	missingMice = diffIds.map(function(id){
-		return mice.get(id);
+		missingMice = diffIds.map(function(id){
+			return mice.get(id);
 	})
+	
+	console.log('missingMice is ', missingMice);
 
 });
-
-console.log('foundMice is', foundMice);
-console.log('foundMiceIds is', foundMiceIds);
-console.log('allMiceIds is', allMiceIds);
-console.log('diffIds is', diffIds);
-console.log('missingMice is ', missingMice);
