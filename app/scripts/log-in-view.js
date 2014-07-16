@@ -35,7 +35,7 @@ var LogInView = Parse.View.extend({
 
 		  error: function(user, error) {
 		  	alert('Error: Log in failed.');
-		  	console.log('User not logged in.');
+		  	console.log('User not logged in.' + error.code + " " + error.message);
 				//user stays on the login page
 		  }
 		});

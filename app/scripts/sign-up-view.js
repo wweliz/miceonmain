@@ -41,12 +41,13 @@ var SignUpView = Parse.View.extend({
 		//saves added input to the server; when done...
 		user.signUp(null, {
 			success: function(user) {
-    	// Hooray! Let them use the app now.
-    		router.navigate('/userview', {trigger: true})
+				console.log('Username', user.get('username'), 'is logged in.');
+    		router.navigate('userview', {trigger: true});
   		},
   		error: function(user, error) {
-    	// Show the error message somewhere and let the user try again.
-    	alert("Error: " + error.code + " " + error.message);
+    		alert('Error: Sign up failed.');
+				console.log('User not logged in.' + error.code + " " + error.message);
+				//user stays on the signup page
   		}
 		});
 	}
