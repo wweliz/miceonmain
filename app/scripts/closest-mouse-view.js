@@ -56,6 +56,7 @@ var ClosestMouseView = Parse.View.extend({
 				//creates a relation between the current user and photosUploaded
 				//adds the uploaded photo to the relation
 				Parse.User.current().relation('photosUploaded').add(uploadedPhoto);
+				Parse.User.current().relation('miceFound').add(nearestMouse);
 				//saves the current user
 				Parse.User.current().save()
 
