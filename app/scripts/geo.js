@@ -8,66 +8,6 @@ var nearestMouse;
 var distToMouse;
 
 //////////////////////////////////////////////////////////////////////////
-// TRACKING THE CURRENT USER'S LOCATION //////////////////////////////////
-
-//there are two methods to get the current position of the device:
-	//navigator.geolocation.getCurrentPosition()
-			//returns the device position ONCE when called
-	//navigator.geolocation.watchPosition()
-			//returns the device position EACH TIME the device position changes
-
-//both take 3 arguements:
-	// first arg:						success callback [geoSuccess]
-	// second arg: 					failure callback [geoError]
-	// optional third arg:	PositionOptions object
-													// property:	enableHighAccuracy
-													// type: Boolean
-													// default: false
-
-//////////////////////////////////////////////////////////////////////////
-// DEFINING THE USER LOCATION SUCCESS CALLBACK ///////////////////////////
-// DEFINING THE NEAREST POINT QUERY //////////////////////////////////////
-
-function geoSuccess(position) {
-	var userLatitude = position.coords.latitude;
-	var userLongitude = position.coords.longitude;
-	userGeoPoint = new Parse.GeoPoint({latitude: userLatitude, longitude: userLongitude});
-
-	console.log('Current user location is: latitude:' + userGeoPoint._latitude + ', longitude:'+ userGeoPoint._longitude + '.');
-
-	//tells the query to look for locations within 10 miles of the user
-	mouseQuery.withinMiles('mouseGeopoint', userGeoPoint, 10);
-	//limits the length of the returned array to 9
-	mouseQuery.limit(9);
-	//finds all objects that match the restraints of the query
-	mouseQuery.find(querySuccess, queryError);
-
-}
-
-//queryresults will be an array of objects ordered by distance
-//(nearest to farthest) from the user's location
-
-//////////////////////////////////////////////////////////////////////////
-// DEFINING THE USER LOCATION FAILURE CALLBACK ///////////////////////////
-function geoError() {
-	alert('Your location could not be determined.');
-	console.log('Your location could not be determined.');
-}
-
-//////////////////////////////////////////////////////////////////////////
-// DEFINING THE TRACK USER LOCATION FUNCTION /////////////////////////////
-function trackUserLocation() {
-	// if there is a currently logged in user...
-if ( Parse.User.current() ) {
-		//passes the success and failure callbacks through the watchPosition function
-			navigator.geolocation.watchPosition(geoSuccess, geoError, {enableHighAccuracy: true});
-	// if there is NOT a currently logged in user...
-} else {
-	console.log('Cannot track user location before log in.');
-	}
-}
-
-//////////////////////////////////////////////////////////////////////////
 // DEFINING THE QUERY SUCCESS CALLBACK ///////////////////////////////////
 function querySuccess(queryresults) {
 	//console.log('Successfully retrieved ' + queryresults.length + ' results.');

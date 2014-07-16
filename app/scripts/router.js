@@ -1,6 +1,12 @@
 /* global Parse */
 'use strict';
 
+var userGeoPoint;
+var mouseQuery = new Parse.Query(Mouse);
+var nearbyMice;
+var nearestMouse;
+var distToMouse;
+
 //////////////////////////////////////////////////////////////////////////
 // THE APP ROUTER ////////////////////////////////////////////////////////
 var AppRouter = Parse.Router.extend({
@@ -41,7 +47,7 @@ var AppRouter = Parse.Router.extend({
 		// create a deferred that some views will depend on resolution for.
 		window.trackingPromise = $.Deferred();
 		//calls the render function (this will resolve trackingPromise when done)
-		trackUserLocation();
+		this.trackUserLocation();
 	},
 
 	////////////////////////////////////////////////////////////////////////
@@ -73,6 +79,69 @@ var AppRouter = Parse.Router.extend({
 			}
 		});
 	},
+
+//////////////////////////////////////////////////////////////////////////
+// TRACKING THE CURRENT USER'S LOCATION //////////////////////////////////
+
+//there are two methods to get the current position of the device:
+	//navigator.geolocation.getCurrentPosition()
+			//returns the device position ONCE when called
+	//navigator.geolocation.watchPosition()
+			//returns the device position EACH TIME the device position changes
+
+//both take 3 arguements:
+	// first arg:						success callback [geoSuccess]
+	// second arg: 					failure callback [geoError]
+	// optional third arg:	PositionOptions object
+													// property:	enableHighAccuracy
+													// type: Boolean
+													// default: false
+
+//////////////////////////////////////////////////////////////////////////
+// DEFINING THE USER LOCATION SUCCESS CALLBACK ///////////////////////////
+// DEFINING THE NEAREST POINT QUERY //////////////////////////////////////
+
+geoSuccess: function(position) {
+	var userLatitude = position.coords.latitude;
+	var userLongitude = position.coords.longitude;
+	userGeoPoint = new Parse.GeoPoint({latitude: userLatitude, longitude: userLongitude});
+
+	console.log('Current user location is: latitude:' + userGeoPoint._latitude + ', longitude:'+ userGeoPoint._longitude + '.');
+
+	//tells the query to look for locations within 10 miles of the user
+	mouseQuery.withinMiles('mouseGeopoint', userGeoPoint, 10);
+	//limits the length of the returned array to 9
+	mouseQuery.limit(9);
+	//finds all objects that match the restraints of the query
+	mouseQuery.find(querySuccess, queryError);
+},
+
+//queryresults will be an array of objects ordered by distance
+//(nearest to farthest) from the user's location
+
+//////////////////////////////////////////////////////////////////////////
+// DEFINING THE USER LOCATION FAILURE CALLBACK ///////////////////////////
+geoError: function() {
+	alert('Your location could not be determined.');
+	console.log('Your location could not be determined.');
+},
+
+//////////////////////////////////////////////////////////////////////////
+// DEFINING THE TRACK USER LOCATION FUNCTION /////////////////////////////
+trackUserLocation: function() {
+	// if there is a currently logged in user...
+if ( Parse.User.current() ) {
+		//passes the success and failure callbacks through the watchPosition function
+			navigator.geolocation.watchPosition(this.geoSuccess, this.geoError, {enableHighAccuracy: true});
+	// if there is NOT a currently logged in user...
+} else {
+	console.log('Cannot track user location before log in.');
+	}
+},
+
+
+
+
 
 	////////////////////////////////////////////////////////////////////////
 	// RENDERING VIEWS /////////////////////////////////////////////////////
