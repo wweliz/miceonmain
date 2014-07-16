@@ -6,8 +6,9 @@ var userGeoPoint,
 		nearbyMice,
 		nearestMouse,
 		distToMouse,
-		foundMice,
+		foundMiceCollection,
 		foundMiceIds,
+		foundMice,
 		allMiceIds,
 		diffIds,
 		missingMice;
@@ -85,29 +86,34 @@ function milesToNearestMouse() {
 // FOUND MICE & REMAINING MICE QUERY /////////////////////////////////////
 
 Parse.User.current().relation('miceFound').query().find().done(function(queryresults){
-	//foundMice will be a collection of found mice
-	foundMice = queryresults;
+	//foundMiceCollection will be a collection of found mice
+	foundMiceCollection = queryresults;
 	// this is a global promise for when the mice are fetched
-		console.log('foundMice is', foundMice);
+	//console.log('foundMiceCollection is', foundMiceCollection);
 	return miceFetched;
 
 	}).done(function(mice){
 		//foundMiceIds will be an array of the found mice ids
-		foundMiceIds = _.pluck(foundMice, "id");
-		console.log('foundMiceIds is', foundMiceIds);
+		foundMiceIds = _.pluck(foundMiceCollection, "id");
+		//console.log('foundMiceIds is', foundMiceIds);
+
+		foundMice = foundMiceIds.map(function(id){
+			return mice.get(id);
+		})
 
 		//allMiceIds will be an array of all the mice ids
 		allMiceIds = _.pluck(mice.models, "id");
-		console.log('allMiceIds is', allMiceIds);
+		//console.log('allMiceIds is', allMiceIds);
 
 		//diffIds will be an array of the remaining (not found) mice ids
 		diffIds = _.difference(allMiceIds, foundMiceIds);
-		console.log('diffIds is', diffIds);
+		//console.log('diffIds is', diffIds);
 
 		missingMice = diffIds.map(function(id){
 			return mice.get(id);
-	})
+		})
 	
+	console.log('foundMice is ', foundMice);
 	console.log('missingMice is ', missingMice);
 
 });
