@@ -101,23 +101,29 @@ Parse.User.current().relation('miceFound').query().find().done(function(queryres
 	// foundMiceIds = _.pluck(foundMice, "id");
 	// console.log('foundMiceIds is', foundMiceIds);
 
+	//foundMiceAttributes will be an array of the found mice attributes
 	foundMiceAttributes = _.pluck(foundMice, "attributes");
 	console.log('foundMiceAttributes is', foundMiceAttributes);
 
+	//foundMiceNames will be an array of the found mice names
 	foundMiceNames = _.pluck(foundMiceAttributes, "mouseName");
 
 	//allMiceIds will be an array of all the mice ids
 	// allMiceIds = _.pluck(mice.models, "id");
 	// console.log('allMiceIds is', allMiceIds);
 
+	//allMiceAttributes will be an array of all the mice attributes
 	allMiceAttributes = _.pluck(mice.models, "attributes");
+	//allMiceNames will be an array of all the mice names
 	allMiceNames = _.pluck(allMiceAttributes, "mouseName");
 
 
 }).done(function(){
+	//diffIds will be an array of the remaining (not found) mice ids
 	// diffIds = _.difference(foundMiceIds, allMiceIds);
 	// console.log('diffIds is', diffIds);
 
+	//diffNames will be an array of the remaining (not found) mice names
 	diffNames = _.difference(foundMiceNames, allMiceNames);
 	console.log('diffNames is', diffNames);
 
