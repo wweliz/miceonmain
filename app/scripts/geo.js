@@ -80,6 +80,8 @@ function milesToNearestMouse() {
 	console.log(nearestMouse.attributes.mouseName + ' is ' + distToMouse + ' miles away.');
 
 	window.trackingPromise.resolve();
+	var coolEvent = new CustomEvent("RenderMeow", {"detail": "this oughta work"})
+	document.dispatchEvent(coolEvent)
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -114,6 +116,19 @@ Parse.User.current().relation('miceFound').query().find().done(function(queryres
 		})
 	
 	console.log('foundMice is ', foundMice);
+	var coolTemplate = _.template($("#indiv-found-mouse").text())
+	console.log("mouse template is"+ coolTemplate) 
+	document.addEventListener("RenderMeow", function(){
+		console.log("caught that there event")
+		_.each(foundMice, function(mouse){
+			$(".mice-found-target").append(coolTemplate({mouse: mouse}))
+
+		})
+
+	})
+
+
+
 	console.log('missingMice is ', missingMice);
 
 });

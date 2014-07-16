@@ -97,10 +97,15 @@
 				<h3> <%= nearestMouse.attributes.mouseName %> </h3>
 				<h4 class="ll"> LAT <%= nearestMouse.attributes.mouseGeopoint._latitude %>, LONG <%= nearestMouse.attributes.mouseGeopoint._longitude %> </h4>
 			<div class="black-bar"><h2>Mice Found</h2></div>
+			<div class="mice-found-target"></div>
 			<div class="black-bar"><h2>Mice Remaining</h2></div>
 			<h2> <%= this.time %> </h2>
 		</script>
+		<script type="text/template" id="indiv-found-mouse">
+		<h1> <%= mouse.get("mouseName") %> </h1>
+		
 
+		</script>
 		<script type="text/template" class="mouse-view-template">
 			<h1> <%= nearestMouse.attributes.mouseName %> </h1>
 			<h4 class="ll"> LAT <%= nearestMouse.attributes.mouseGeopoint._latitude %>, LONG <%= nearestMouse.attributes.mouseGeopoint._longitude %> </h4>
