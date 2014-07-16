@@ -80,55 +80,34 @@ function milesToNearestMouse() {
 // FOUND MICE & REMAINING MICE QUERY /////////////////////////////////////
 var foundMice;
 var foundMiceIds;
-var foundMiceAttributes;
-var foundMiceNames;
-var allMiceAttributes;
-var allMiceNames;
 var allMiceIds;
-var diffNames;
 var diffIds;
 var missingMice;
 
 Parse.User.current().relation('miceFound').query().find().done(function(queryresults){
 	//foundMice will be a collection of found mice
 	foundMice = queryresults;
-
 	// this is a global promise for when the mice are fetched
 	return miceFetched;
+
 }).done(function(mice){
 	//foundMiceIds will be an array of the found mice ids
 	foundMiceIds = _.pluck(foundMice, "id");
-	console.log('foundMiceIds is', foundMiceIds);
-
-	//foundMiceAttributes will be an array of the found mice attributes
-	foundMiceAttributes = _.pluck(foundMice, "attributes");
-	console.log('foundMiceAttributes is', foundMiceAttributes);
-
-	//foundMiceNames will be an array of the found mice names
-	foundMiceNames = _.pluck(foundMiceAttributes, "mouseName");
 
 	//allMiceIds will be an array of all the mice ids
 	allMiceIds = _.pluck(mice.models, "id");
-	console.log('allMiceIds is', allMiceIds);
-
-	//allMiceAttributes will be an array of all the mice attributes
-	allMiceAttributes = _.pluck(mice.models, "attributes");
-	//allMiceNames will be an array of all the mice names
-	allMiceNames = _.pluck(allMiceAttributes, "mouseName");
-
 
 	//diffIds will be an array of the remaining (not found) mice ids
 	diffIds = _.difference(allMiceIds, foundMiceIds);
-	console.log('diffIds is', diffIds);
-
-	//diffNames will be an array of the remaining (not found) mice names
-	diffNames = _.difference(allMiceNames, foundMiceNames);
-	console.log('diffNames is', diffNames);
 
 	missingMice = diffIds.map(function(id){
 		return mice.get(id);
 	})
-	console.log('missingMice is ', missingMice);
 
 });
 
+console.log('foundMice is', foundMice);
+console.log('foundMiceIds is', foundMiceIds);
+console.log('allMiceIds is', allMiceIds);
+console.log('diffIds is', diffIds);
+console.log('missingMice is ', missingMice);
