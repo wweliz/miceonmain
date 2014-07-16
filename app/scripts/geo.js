@@ -75,3 +75,54 @@ function milesToNearestMouse() {
 
 	window.trackingPromise.resolve();
 }
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+				// Parse.User.current().relation('photosUploaded').add(uploadedPhoto);
+				// Parse.User.current().relation('miceFound').add(nearestMouse);
+
+
+var foundMice;
+var foundMiceIds;
+var foundMiceAttributes;
+var foundMiceNames;
+var allMiceAttributes;
+var allMiceNames;
+var allMiceIds;
+var diffNames;
+var diffIds;
+
+Parse.User.current().relation('miceFound').query().find().done(function(queryresults){
+	//foundMice will be a collection of found mice
+	foundMice = queryresults;
+}).done(function(){
+	//foundMiceIds will be an array of the found mice ids
+	// foundMiceIds = _.pluck(foundMice, "id");
+	// console.log('foundMiceIds is', foundMiceIds);
+
+	foundMiceAttributes = _.pluck(foundMice, "attributes");
+	console.log('foundMiceAttributes is', foundMiceAttributes);
+
+	foundMiceNames = _.pluck(foundMiceAttributes, "mouseName");
+
+	//allMiceIds will be an array of all the mice ids
+	// allMiceIds = _.pluck(mice.models, "id");
+	// console.log('allMiceIds is', allMiceIds);
+
+	allMiceAttributes = _.pluck(mice.models, "attributes");
+	allMiceNames = _.pluck(allMiceAttributes, "mouseName");
+
+
+}).done(function(){
+	// diffIds = _.difference(foundMiceIds, allMiceIds);
+	// console.log('diffIds is', diffIds);
+
+	diffNames = _.difference(foundMiceNames, allMiceNames);
+	console.log('diffNames is', diffNames);
+
+});
+
+// var missingMice = diffIds.map(function(id){
+// 	return allMice.get(id);
+// })
