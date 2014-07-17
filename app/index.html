@@ -20,17 +20,18 @@
 		<script src="bower_components/modernizr/modernizr.js"></script>
 		<script type="text/javascript" src="//use.typekit.net/cuo1poj.js"></script>
 		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+		<link href='http://fonts.googleapis.com/css?family=Roboto:300,500' rel='stylesheet' type='text/css'>
 		<!-- endbuild -->
 	</head>
 
 	<body>
 		<div class="menubar">
-			<span class="home-btn"> <img src="../images/eye.png"> </span>
-			<span class="nearest-mouse-btn"> <img src="../images/globe.png"> </span>
-			<span class="photo-gallery-btn"> <img src="../images/camera.png"> </span>
-			<span class="history-btn"> <img src="../images/book.png"> </span>
-			<span class="settings-btn"> <img src="../images/user.png"> </span>
-			<span class="logout-btn"> <img src="../images/logout.png"> </span>
+			<img class="home-btn" src="../images/globe.png">
+			<img class="nearest-mouse-btn" src="../images/eye.png">
+<!-- 			<img class="photo-gallery-btn" src="../images/camera.png"> -->
+			<img class="history-btn" src="../images/book.png">
+			<img class="settings-btn" src="../images/user.png">
+			<img class="logout-btn" src="../images/logout.png">
 		</div>
 		
 		<div class="main-container">
@@ -69,8 +70,7 @@
 			<img src="../images/mouse.png">
 			<input class="username-input" type="text" placeholder="Username">
 			<input class="email-input" type="text" placeholder="Email">
-			<input class="password-input" type="text" placeholder="Password">
-			<input class="hometown-input" type="text" placeholder="Where are you from?">
+			<input class="password-input" type="password" placeholder="Password">
 			<span class="signup-btn button">Sign Up</span>
 		</script>
 
@@ -78,27 +78,37 @@
 			<h1>Log In</h1>
 			<img src="../images/mouse.png">
 			<input class="username-input" type="text" placeholder="Username">
-			<input class="password-input" type="text" placeholder="Password">
+			<input class="password-input" type="password" placeholder="Password">
 			<span class="login-btn button">Log In</span>
 		</script>
 
 		<script type="text/template" class="user-settings-template">
-			<h1>Settings</h1>
+			<h1>User Settings</h1>
 			<input class="email-input" type="text" placeholder="Email">
-			<input class="password-input" type="text" placeholder="Password">
+			<input class="password-input" type="password" placeholder="Password">
 			<span class="save-settings-btn button">Save</span>
 		</script>
 
 		<script type="text/template" class="user-home-template">
 			<h1> <%= Parse.User.current().attributes.username %> </h1>
-				<h4 class="ll"> LAT <%= userGeoPoint._latitude %>, LONG <%= userGeoPoint._longitude %> </h4>
-			<div class="black-bar"><h2>Closest Mouse</h2></div>
+			<div class="user-bar">
+					<h4 class="ll title"> CURRENT POSITION </h4><br>
+					<h4 class="ll title"> LAT </h4>
+					<h4 class="ll khaki"> <%= userGeoPoint._latitude.toFixed(5) %> </h4>
+					<h4 class="ll title"> LONG </h4>
+					<h4 class="ll khaki"> <%= userGeoPoint._longitude.toFixed(5) %> </h4>
+			</div>
+			<div class="black-bar"></div>
+			<h2 class="title">Closest Mouse</h2>
+			<div class="black-bar"></div>
 				<h3> <%= nearestMouse.attributes.mouseName %> </h3>
 				<h4 class="ll"> LAT <%= nearestMouse.attributes.mouseGeopoint._latitude %>, LONG <%= nearestMouse.attributes.mouseGeopoint._longitude %> </h4>
-			<div class="black-bar"><h2>Mice Found</h2></div>
-			<div class="mice-found-target"></div>
-			<div class="black-bar"><h2>Mice Remaining</h2></div>
-			<div class="mice-remaining-target"></div>
+			<h2 class="title">Mice Found</h2>
+			<div class="black-bar"></div>
+				<div class="mice-found-target"></div>
+			<h2 class="title">Mice Remaining</h2>
+			<div class="black-bar"></div>
+				<div class="mice-remaining-target"></div>
 		</script>
 
 		<script type="text/template" id="indiv-found-mouse">
@@ -111,7 +121,12 @@
 
 		<script type="text/template" class="mouse-view-template">
 			<h1> <%= nearestMouse.attributes.mouseName %> </h1>
-			<h4 class="ll"> LAT <%= nearestMouse.attributes.mouseGeopoint._latitude %>, LONG <%= nearestMouse.attributes.mouseGeopoint._longitude %> </h4>
+			<h4 class="ll title"> LAT </h4>
+			<h4 class="ll"> <%= nearestMouse.attributes.mouseGeopoint._latitude %> </h4>
+			<h4 class="ll title"> , LONG </h4>
+			<h4 class="ll"> <%= nearestMouse.attributes.mouseGeopoint._longitude %> </h4><br>
+			<h4 class="ll title"> DISTANCE </h4>
+			<h4 class="ll"> <%= distToMouse %> miles away </h4>
 			<p> <%= nearestMouse.attributes.mouseHint %> </p>
 			<input type="file" capture="camera" accept="image/*" id="takePictureField">
 			<span class="upload-mouse-photo-btn button">Upload Mouse Photo</span>

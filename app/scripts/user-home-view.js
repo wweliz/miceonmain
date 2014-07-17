@@ -8,7 +8,7 @@ var UserHomeView = Parse.View.extend({
 
 	initialize: function(){
 		//appends home-view div with contents of the user-home-template
-		$('.home-view').append(this.el);
+		$('.home-view').html(this.el);
 		//render called inside of swap function
 	},
 

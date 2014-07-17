@@ -5,6 +5,7 @@ var userGeoPoint,
 		mouseQuery = new Parse.Query(Mouse),
 		nearbyMice,
 		nearestMouse,
+		distance,
 		distToMouse,
 		foundMiceCollection,
 		foundMiceIds,
@@ -76,7 +77,9 @@ function findNearestMouse() {
 // FINDING THE DISTANCE TO THE NEAREST MOUSE /////////////////////////////
 function milesToNearestMouse() {
 		// 1 meter = 0.000621371 miles
-	distToMouse = getDistance(userGeoPoint, nearestMouse.get('mouseGeopoint')) * 0.000621371;
+	distance = getDistance(userGeoPoint, nearestMouse.get('mouseGeopoint')) * 0.000621371;
+	distToMouse = distance.toFixed(3);
+
 	console.log(nearestMouse.attributes.mouseName + ' is ' + distToMouse + ' miles away.');
 
 	window.trackingPromise.resolve();
