@@ -27,21 +27,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-	//color: $dkgray;
+	color: $grblue;
 	text-decoration: none;
 }
 
 .menubar {
-	height: 40px;
+	height: 50px;
 	background-color: $ltgreen;
 	margin: 0;
 
-	.home-btn {margin: 7px 5px 7px 10px;}
-	.nearest-mouse-btn {margin: 10px 3px 10px 5px;}
-	.photo-gallery-btn {margin: 8px 5px 8px 5px;}
-	.history-btn {margin: 8px 5px 8px 5px;}
-	.settings-btn {margin: 7px 5px 7px 5px;}
-	.logout-btn {margin: 10px 5px 10px 5px;}
+	.home-btn {margin: 10px 5px 10px 10px;}
+	.nearest-mouse-btn {margin: 16px 5px 16px 5px;}
+	.history-btn {margin: 11px 5px 11px 5px;}
+	.settings-btn {margin: 10px 5px 10px 5px;}
+	.logout-btn {margin: 13px 5px 13px 5px;}
 }
 
 .main-container {
@@ -93,8 +92,6 @@ input {
 // SPLASH VIEW STYLING ///////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 .splash-view {
-	.menubar { display: none; }
-
 	h1 {font-size: 3em;}
 	h2 {margin: 0;}
 	h1, h2 {font-family: "zubilo-web-black";}

@@ -144,6 +144,7 @@ var AppRouter = Parse.Router.extend({
 	// RENDERING VIEWS /////////////////////////////////////////////////////
 	renderSplashPage: function(){
 		this.swap( new SplashView() );
+		$('.menubar').remove();
 	},
 
 	renderSignUp: function(){
